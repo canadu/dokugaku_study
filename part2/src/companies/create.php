@@ -6,7 +6,7 @@ function createCompany($link, $company)
     $sql = <<<EOT
     INSERT INTO companies (
         name,
-        establishment_date,
+        establishment_dates,
         founder
     ) VALUES (
         "{$company['name']}",
@@ -15,29 +15,23 @@ function createCompany($link, $company)
     )
 EOT;
     $result = mysqli_query($link, $sql);
-    if ($result) {
-        echo '登録が完了しました。' . PHP_EOL;
-    } else {
-        echo '登録が失敗しました。' . PHP_EOL;
-        echo 'Debugging error: ' . mysqli_connect_errno() . PHP_EOL;
+    if (!$result) {
+        error_log('Error: fail to create company');
+        error_log('Debugging error:' . mysqli_error($link));
     }
 }
 //HTTPメソッドがPOSTだったら
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //POSTされた会社情報を変数に格納する
     $company =  [
         'name' => $_POST['name'],
         'establishment_date' => $_POST['establishment_date'],
         'founder' => $_POST['founder']
     ];
     //バリデーションする
-
-    //データベースにデータを接続する
     $link = dbConnect();
-
-    //データベースにデータを登録する
     createCompany($link, $company);
-    //データベースとの接続を切断する
     mysqli_close($link);
 }
+
+header("Location:index.php");
