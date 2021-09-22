@@ -13,7 +13,7 @@
 <body>
     <h1>読書ログ</h1>
     <h3>読書ログの記録</h3>
-    <form action="" method="post">
+    <form action="create.php" method="post">
         <div>
             <label for="bookName">書籍名</label>
             <input type="text" id="bookName" name="bookName">
@@ -40,7 +40,7 @@
         </div>
         <div>
             <label for="thoughts">感想</label>
-            <textarea name="textarea" id="thoughts" rows="10"></textarea>
+            <textarea name="thoughts" id="thoughts" rows="10"></textarea>
         </div>
         <button type="submit">登録する</button>
     </form>

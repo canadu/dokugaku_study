@@ -9,8 +9,7 @@ function createBooklog($link, $book)
         author,
         status,
         score,
-        summary,
-        create_at
+        summary
     ) VALUES (
         "{$book['bookName']}",
         "{$book['authorName']}",
@@ -20,6 +19,7 @@ function createBooklog($link, $book)
     )
 EOT;
     $result = mysqli_query($link, $sql);
+    var_dump($result);
     if (!$result) {
         error_log('Error: fail to create review');
         error_log('Debugging error:' . mysqli_error($link));
@@ -34,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'evaluation' => $_POST['evaluation'],
         'thoughts' => $_POST['thoughts']
     ];
+    
     $link = dbConnect();
     createBooklog($link, $book);
-
     mysqli_close($link);
 }
 
