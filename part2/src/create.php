@@ -9,8 +9,7 @@ function createBooklog($link, $book)
         author,
         status,
         score,
-        summary,
-        create_at
+        summary
     ) VALUES (
         "{$book['bookName']}",
         "{$book['authorName']}",
@@ -34,9 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'evaluation' => $_POST['evaluation'],
         'thoughts' => $_POST['thoughts']
     ];
+    var_dump($book);
     $link = dbConnect();
+    var_dump($link);
     createBooklog($link, $book);
-
+    var_dump(100);
     mysqli_close($link);
 }
 
