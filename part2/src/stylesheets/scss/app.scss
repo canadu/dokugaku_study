@@ -1,0 +1,18 @@
+// IE hack
+@media all and (-ms-high-contrast: none) {
+
+    body,
+    tooltip,
+    popover {
+        font-family: Verdana, Meiryo, sans-serif;
+    }
+}
+
+// 拡張子を省略してimport出来る
+@import '/var/www/html/vendor/twbs/bootstrap/scss/bootstrap';
+
+// letter-specing
+body {
+    letter-spacing: 0.1em;
+    text-align: justify;
+}
