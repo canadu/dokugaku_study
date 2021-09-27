@@ -1,10 +1,3 @@
-
-=======
-<?php
-// include 'layout.php';
-// $title = '会社情報の登録';
-?>
-
 <h1 class="h2 text-dark mt-4 mb-4">会社情報の登録</h1>
 <form action="create.php" method="post">
     <?php if (count($errors)) : ?>

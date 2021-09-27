@@ -73,20 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //もしエラーが有る場合
 }
 
-$title = '会社情報の登録';
-$content = __DIR__ . '/views/new.php';
-include __DIR__ . '/views/layout.php';
-
-
-    $errors = validate($company);
-
-    if (!count($errors)) {
-        $link = dbConnect();
-        createCompany($link, $company);
-        mysqli_close($link);
-        header("Location:index.php");
-    }
-    //もしエラーが有る場合
-}
-include  'views/new.php';
-
+// $title = '会社情報の登録';
+// $content = __DIR__ . '/views/new.php';
+// include __DIR__ . '/views/layout.php';
