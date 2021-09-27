@@ -1,3 +1,9 @@
+
+<?php
+// include 'layout.php';
+// $title = '会社情報の一覧';
+?>
+
 <h1>会社情報の一覧</h1>
 <a href="new.php">会社情報を登録する</a>
 <main>
