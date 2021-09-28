@@ -10,10 +10,10 @@
                         タイトル：<?php echo escape($review['title']); ?>
                     </h4>
                     <p class="card-text">
-                    著者：<?php echo escape($review['author']); ?>&nbsp;|&nbsp;
-                    状況：<?php echo escape($review['status']); ?>&nbsp;|&nbsp;
-                    評価：<?php echo escape($review['score']); ?>&nbsp;|&nbsp;</p>
-                    <p class="card-text">感想：<?php echo escape($review['summary']); ?></p>
+                        著者：<?php echo escape($review['author']); ?>&nbsp;|&nbsp;
+                        状況：<?php echo escape($review['status']); ?>&nbsp;|&nbsp;
+                        評価：<?php echo escape($review['score']); ?>&nbsp;|&nbsp;</p>
+                    <p class="card-text">感想：<?php echo nl2br(escape($review['summary'])); ?></p>
                 </div>
             </section>
         <?php endforeach; ?>

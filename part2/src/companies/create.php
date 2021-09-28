@@ -1,4 +1,5 @@
 <?php
+
 require __DIR__ . '/lib/mysql.php';
 
 function createCompany($link, $company)
@@ -6,7 +7,7 @@ function createCompany($link, $company)
     $sql = <<<EOT
     INSERT INTO companies (
         name,
-        establishment_dates,
+        establishment_date,
         founder
     ) VALUES (
         "{$company['name']}",
@@ -23,9 +24,7 @@ EOT;
 
 function validate($company)
 {
-
     $errors = [];
-
     //会社名
     if (!strlen($company['name'])) {
         $errors['name'] = '会社名を入力してください';
@@ -49,7 +48,6 @@ function validate($company)
     } elseif (strlen($company['founder']) > 100) {
         $errors['founder'] = '代表者は255文字以内で入力してください';
     }
-
     return $errors;
 }
 
@@ -61,9 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'founder' => $_POST['founder']
     ];
 
-
     $errors = validate($company);
-
     if (!count($errors)) {
         $link = dbConnect();
         createCompany($link, $company);
@@ -73,6 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //もしエラーが有る場合
 }
 
-// $title = '会社情報の登録';
-// $content = __DIR__ . '/views/new.php';
-// include __DIR__ . '/views/layout.php';
+$title = '会社情報の登録';
+$content = __DIR__ . '/views/new.php';
+include __DIR__ . '/views/layout.php';

@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'thoughts' => $_POST['thoughts']
     ];
     $errors = validate($book);
-    
+
     if (!count($errors)) {
         $link = dbConnect();
         createBooklog($link, $book);
