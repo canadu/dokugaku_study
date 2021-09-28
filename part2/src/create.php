@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/lib/mysql.php';
+require __DIR__ . '/lib/mysqli.php';
 
 function createBooklog($link, $book)
 {
@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'thoughts' => $_POST['thoughts']
     ];
     $errors = validate($book);
+    
     if (!count($errors)) {
         $link = dbConnect();
         createBooklog($link, $book);
@@ -67,4 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location:index.php");
     }
 }
-include  'views/new.php';
+
+$title = '読書ログの登録';
+$content = __DIR__ . '/views/new.php';
+include __DIR__ . '/views/layout.php';

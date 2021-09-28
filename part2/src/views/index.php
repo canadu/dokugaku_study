@@ -1,29 +1,23 @@
-<form action="new.php" method="POST">
-
-    <button type="submit" class="btn btn-primary mb-5">読書ログを登録する</button>
-
-    <div class="card-deck mb-3     ">
-        <div class="col-sm-12">
-            <div class="card">
+<!-- <h1 class="h2 text-dark mt-4 mb-4">読書ログの一覧</h1> -->
+<!-- <a href="new.php" class="btn btn-info mb-4">読書ログを登録する</a> -->
+<a href="../new.php" class="btn btn-info mb-4">登録する</a>
+<main>
+    <?php if (count($reviews) > 0) : ?>
+        <?php foreach ($reviews as $review) : ?>
+            <section class="card shadow-sm mb-4">
                 <div class="card-body">
-                    <h4 class="card-title">新世界より</h4>
-                    <p class="card-text">〇〇丸 / 読了　/ 5点</p>
-                    <p class="card-text">寝食を忘れ、貪るように読んでしまった。あっと的な神本。感情を揺さぶられ、悲しみ。興奮感動の全てが押し寄せる。</p>
+                    <h4 class="card-title">
+                        タイトル：<?php echo escape($review['title']); ?>
+                    </h4>
+                    <p class="card-text">
+                    著者：<?php echo escape($review['author']); ?>&nbsp;|&nbsp;
+                    状況：<?php echo escape($review['status']); ?>&nbsp;|&nbsp;
+                    評価：<?php echo escape($review['score']); ?>&nbsp;|&nbsp;</p>
+                    <p class="card-text">感想：<?php echo escape($review['summary']); ?></p>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card-deck mb-3">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">新世界より</h4>
-                    <p class="card-text">〇〇丸 / 読了　/ 5点</p>
-                    <p class="card-text">寝食を忘れ、貪るように読んでしまった。あっと的な神本。感情を揺さぶられ、悲しみ。興奮感動の全てが押し寄せる。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</form>
+            </section>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <p>読書ログが登録されていません</p>
+    <?php endif; ?>
+</main>
