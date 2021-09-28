@@ -1,4 +1,4 @@
-<h1 class="h2 text-dark mt-4 mb-4">>会社情報の一覧</h1>
+<h1 class="h2 text-dark mt-4 mb-4">会社情報の一覧</h1>
 <a href="new.php" class="btn btn-info mb-4">会社情報を登録する</a>
 <main>
     <?php if (count($companies) > 0) : ?>
