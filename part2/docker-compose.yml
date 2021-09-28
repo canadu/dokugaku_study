@@ -14,6 +14,7 @@ services:
 
   db:
     image: mysql/mysql-server:5.5.62
+    command: mysqld --character-set-server=utf8extimb4 --collation-server=utf8mb4_unicode_ci
     ports:
       - "53306:3306"
     volumes:
