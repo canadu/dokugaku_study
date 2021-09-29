@@ -39,7 +39,6 @@ function validate($book)
     } elseif (strlen($book['authorName']) > 100) {
         $errors['authorName'] = "著者名の名前を入力してください。";
     }
-
     if (!strlen($book['evaluation'])) {
         $errors['evaluation'] = "評価を入力してください。";
     } elseif (!is_numeric($book['evaluation'])) {

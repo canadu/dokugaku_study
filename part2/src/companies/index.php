@@ -16,7 +16,6 @@ function listCompanies($link)
     mysqli_free_result($results);
     return $companies;
 }
-
 $link = dbConnect();
 $companies = listCompanies($link);
 

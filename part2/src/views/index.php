@@ -1,6 +1,7 @@
 <!-- <h1 class="h2 text-dark mt-4 mb-4">読書ログの一覧</h1> -->
 <!-- <a href="new.php" class="btn btn-info mb-4">読書ログを登録する</a> -->
-<a href="../new.php" class="btn btn-info mb-4">登録する</a>
+<a href="new.php" class="btn btn-info mb-4">登録する</a>
+<a href="search.php" class="btn btn-success mb-4">検索する</a>
 <main>
     <?php if (count($reviews) > 0) : ?>
         <?php foreach ($reviews as $review) : ?>

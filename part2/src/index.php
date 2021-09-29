@@ -3,6 +3,14 @@
 require_once __DIR__ . '/lib/mysqli.php';
 require_once __DIR__ . '/lib/commom.php';
 
+$book = [
+    'bookName' => '',
+    'authorName' => '',
+    'status' => 'unRead',
+    'evaluation' => '',
+    'thoughts' => '',
+];
+
 function listBooklog($link)
 {
     $reviews = [];
