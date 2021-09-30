@@ -2,6 +2,7 @@
 <!-- <a href="new.php" class="btn btn-info mb-4">読書ログを登録する</a> -->
 <a href="new.php" class="btn btn-info mb-4">登録する</a>
 <a href="search.php" class="btn btn-success mb-4">検索する</a>
+<a href="../clear.php" class="btn btn-secondary mb-4">条件クリア</a>
 <main>
     <?php if (count($reviews) > 0) : ?>
         <?php foreach ($reviews as $review) : ?>
