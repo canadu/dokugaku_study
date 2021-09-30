@@ -22,3 +22,12 @@ services:
       - ./docker/db/mysql_data:/var/lib/mysql
     env_file:
       - ./docker/db/db-variables.env
+  
+  dockerphpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+    - "4040:80"
+    links:
+    - db
+    env_file:
+      - ./docker/db/db-variables.env
