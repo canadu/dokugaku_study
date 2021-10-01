@@ -46,7 +46,7 @@
         <!-- <textarea name="thoughts" id="thoughts" class="form-control" rows="10" value=""></textarea> -->
     </div>
     <div class="text-right">
-        <button type="submit" class="btn btn-primary">検索する</button>
+        <button type="submit" class="btn btn-success">検索する</button>
         <a href="index.php" class="btn btn-secondary">戻る</a>
     </div>
 

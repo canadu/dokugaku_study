@@ -49,5 +49,9 @@
         <textarea name="thoughts" id="thoughts" class="form-control" rows="10" value="<?php echo $book['thoughts']; ?>"></textarea>
     </div>
 
-    <button type="submit" class="btn btn-primary">登録する</button>
+    <div class="text-right">
+        <button type="submit" class="btn btn-info">登録する</button>
+        <a href="index.php" class="btn btn-secondary">戻る</a>
+    </div>
+
 </form>
