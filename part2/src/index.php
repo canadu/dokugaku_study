@@ -35,23 +35,27 @@ function getSearchReviews($link, $book) {
     $sql = 'SELECT * FROM reviews';
     
     // 検索条件を設定
+    //タイトル
     if (strlen($book['bookName'])) {
         $buf = "title LIKE '%{$book['bookName']}%'"; 
         $sql = $sql . ((searchWhere($sql) === false) ? ' WHERE ' . $buf : ' AND ' . $buf);
     }
+    //著者
     if (strlen($book['authorName'])) {
         $buf = "author LIKE '%{$book['authorName']}%'"; 
         $sql = $sql . ((searchWhere($sql) === false) ? ' WHERE ' . $buf : ' AND ' . $buf);
     }
-
+    // 読書状況
     if (strlen($book['status'])) {
         $buf = "status = '{$book['status']}'"; 
         $sql = $sql . ((searchWhere($sql) === false) ? ' WHERE ' . $buf : ' AND ' . $buf);
     }
+    // 評価
     if (strlen($book['evaluation'])) {
         $buf = "score = {$book['evaluation']}"; 
         $sql = $sql . ((searchWhere($sql) === false) ? ' WHERE ' . $buf : ' AND ' . $buf);
     }
+    //感想
     if (strlen($book['thoughts'])) {
         $buf = "summary LIKE '%{$book['thoughts']}%'"; 
         $sql = $sql . ((searchWhere($sql) === false) ? ' WHERE ' . $buf : ' AND ' . $buf);
@@ -81,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //レビュー情報を取得
     $reviews = getSearchReviews($link, $book);
     mysqli_close($link);
-
 } else {
     //db接続
     $link = dbConnect();
