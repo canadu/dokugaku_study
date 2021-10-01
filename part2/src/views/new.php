@@ -48,10 +48,8 @@
         <label for="thoughts">感想</label>
         <textarea name="thoughts" id="thoughts" class="form-control" rows="10" value="<?php echo $book['thoughts']; ?>"></textarea>
     </div>
-
     <div class="text-right">
         <button type="submit" class="btn btn-info">登録する</button>
         <a href="index.php" class="btn btn-secondary">戻る</a>
     </div>
-
 </form>

@@ -11,8 +11,8 @@
 
     <div class="form-group">
         <label for="authorName">著者名</label>
-        <!-- <input type="text" id="authorName" class="form-control" name="authorName" value="<?php echo $book['authorName']; ?>"> -->
-        <input type="text" id="authorName" class="form-control" name="authorName" value="">
+        <input type="text" id="authorName" class="form-control" name="authorName" value="<?php echo $book['authorName']; ?>">
+        <!-- <input type="text" id="authorName" class="form-control" name="authorName" value=""> -->
     </div>
     <!-- ラジオボタン -->
     <div class="form-group">
