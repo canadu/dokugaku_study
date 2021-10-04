@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheets/css/app.css">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="stylesheets/css/custom.css">
     <title>Document</title>
 </head>
@@ -15,15 +13,15 @@
 <body>
 
     <!-- ヘッダー -->
-    <!-- <header class="py-4">
+    <header class="py-4">
         <div class="container text-center">
-            <h1><a href="index.tmml">テスト</a></h1>
+            <h1><a href="index.tmml">てすてす</a></h1>
         </div>
-    </header> -->
+    </header>
     <!-- ヘッダー -->
 
     <!-- ナビゲーションバー -->
-    <!-- sticky-top -->　スクロールしても固定
+    <!-- sticky-top スクロールしても固定 -->　
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
 
         <!-- サブコンポーネント -->
@@ -36,7 +34,8 @@
             <!-- 切り替えボタン -->
 
             <!-- ハンバーガーメニュー -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content"
+                aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -47,25 +46,32 @@
                 <!-- 左側メニュー：トップページの各コンテンツへのリンク -->
                 <!-- mr-auto は右側に、.ml-auto は左側に最大限のマージンをつけます。 -->
                 <ul class="navbar-nav mr-auto">
-                    
+
                     <li class="nav-item active">
+                        <!-- sr-only スクリーンリーダー用クラス -->
                         <a class="nav-link" href="#">Top <span class="sr-only">(current)</span></a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a class="nav-link" href="#">Menu</a>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a class="nav-link" href="#">Coupon</a>
                     </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Infomation</a>
+
+                    <!-- ドロップダウン -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Information</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Shop</a>
+                            <a class="dropdown-item" href="#">Access</a>
+                        </div>
                     </li>
                 </ul>
 
@@ -76,7 +82,6 @@
                     </li>
                 </ul>
                 <!-- ナビゲーションメニュー -->
-
             </div>
         </div>
         <!-- サブコンポーネント -->
@@ -90,21 +95,26 @@
             <div class="container">
                 <!-- カルーセル外枠 -->
                 <div id="main_visual" class="carousel slide" data-ride="carousel">
+
                     <!-- インジケーター -->
                     <ol class="carousel-indicators">
                         <li data-target="#main_visual" data-slide-to="0" class="active"></li>
-                        <li data-target="#main_visual" data-slide-to="1" class="active"></li>
-                        <li data-target="#main_visual" data-slide-to="2" class="active"></li>
+                        <li data-target="#main_visual" data-slide-to="1"></li>
+                        <li data-target="#main_visual" data-slide-to="2"></li>
                     </ol>
                     <!-- インジケーター -->
+
                     <!-- カルーセル内枠 -->
                     <div class="carousel-inner">
-                        
+
                         <!-- スライド01 -->
                         <div class="carousel-item active">
                             <!-- 一枚目のスライド画像とキャプションが入ります -->
-                            <img class="img-fluid" src="" alt="コーヒー写真">
-                            <div class="carousel-caption d-note d-md-block">
+                            <!-- img-fluid：親要素のサイズによってサイズが変化するレスポンシブ対応の画像を配置する -->
+                            <img class="img-fluid" src="img/1.png" alt="コーヒー写真">
+
+                            <!-- d-none:dipayユーティリティー ディスプレイが小さい場合、キャプションを非表示 -->
+                            <div class="carousel-caption d-none d-md-block">
                                 <h2>MR M COFFEEのこだわり</h2>
                                 <p>店主が世界中のコーヒー豆を厳選し、コーヒー豆の種類に合わせ、心を込めて焙煎、抽出しております。</p>
                             </div>
@@ -114,8 +124,9 @@
                         <!-- スライド02 -->
                         <div class="carousel-item">
                             <!-- 一枚目のスライド画像とキャプションが入ります -->
-                            <img class="img-fluid" src="" alt="ランチ写真">
-                            <div class="carousel-caption d-note d-md-block">
+
+                            <img class="img-fluid" src="img/2.png" alt="ランチ写真">
+                            <div class="carousel-caption d-none d-md-block">
                                 <h2>MR M COFFEEのこだわり</h2>
                                 <p>店主が世界中のコーヒー豆を厳選し、コーヒー豆の種類に合わせ、心を込めて焙煎、抽出しております。</p>
                             </div>
@@ -125,8 +136,8 @@
                         <!-- スライド03 -->
                         <div class="carousel-item">
                             <!-- 一枚目のスライド画像とキャプションが入ります -->
-                            <img class="img-fluid" src="" alt="店内写真">
-                            <div class="carousel-caption d-note d-md-block">
+                            <img class="img-fluid" src="img/3.png" alt="店内写真">
+                            <div class="carousel-caption d-none d-md-block">
                                 <h2>MR M COFFEEのこだわり</h2>
                                 <p>店主が世界中のコーヒー豆を厳選し、コーヒー豆の種類に合わせ、心を込めて焙煎、抽出しております。</p>
                             </div>
@@ -136,13 +147,14 @@
                     <!-- カルーセル内枠 -->
 
                     <!-- コントローラー -->
+                    <!-- コントローラーa要素のhref属性値はカルーセル外枠のid属性値と一致させる -->
                     <a class="carousel-control-prev" href="#main_visual" role="button" data-slide="prev">
-                        <!-- 前に戻るコントローラーが入ります -->
+                        <!-- 前に戻るコントローラー -->
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">前に戻る</span>
                     </a>
                     <a class="carousel-control-next" href="#main_visual" role="button" data-slide="next">
-                        <!-- 次に進むコントローラーが入ります -->
+                        <!-- 次に進むコントローラー -->
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">次に進む</span>
                     </a>
