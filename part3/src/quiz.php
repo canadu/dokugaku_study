@@ -42,14 +42,31 @@
 
 $array = array_chunk(array_slice($argv, 1), 2);
 $total = 0;
-$idx = 0;
 const ONE_HOUTR = 60;
 
-foreach ($array as $value) { 
+//キー(チャンネル)を重複を省いた配列にする
+$keys = array_values(array_unique(array_column($array, 0)));
 
-    //視聴時間の合計
-    $total += $value[1];
+//キー(チャンネル)の回数分処理を行う
+foreach ($keys as $value) {
+    $num = 0;
+    $idx = 0;
+    foreach ($array as $row) {
+        if ($row[0] == $value) {
+            //チャンネルごとの視聴時間を加算
+            $num += $row[1];
+            //回数をインクリメント
+            $idx++;
+        }
+    }
+    //トータルの視聴時間を加算
+    $total += $num;
+    // $sum[$value] = array($num, $idx);
+    $sum[] = array($value, $num, $idx);
 }
-
 $total = round($total / ONE_HOUTR, 1);
 echo $total . PHP_EOL;
+
+foreach ($sum as $value) {
+    echo $value[0] . ' ' . $value[1] . ' ' . $value[2] . PHP_EOL;
+}
