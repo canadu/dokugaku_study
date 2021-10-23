@@ -40,39 +40,59 @@
 // ◯実行コマンド例
 // php quiz.php 1 30 5 25 2 30 1 15
 
-$total = 0;
-const ONE_HOUTR = 60;
+const SPLIT_LENGTH = 2;
 
-//配列を２つずつに区切る
-$array = array_chunk(array_slice($argv, 1), 2);
+//講義を受けてからのプログラミング
+function getArgument(): array
+{
+    $argument =  $_SERVER['argv'];
+    return $argument;
+}
 
-//キー(チャンネル)を重複を省いた配列にする
-// array_values = 配列の全ての値を返す
-$keys = array_values(array_unique(array_column($array, 0)));
-
-//キー(チャンネル)の回数分処理を行う
-foreach ($keys as $value) {
-    $num = 0;
-    $idx = 0;
-    //キーが同じである場合value(視聴時間を加算)
-    foreach ($array as $row) {
-        if ($row[0] == $value) {
-            //チャンネルごとの視聴時間を加算
-            $num += $row[1];
-            //回数をインクリメント
-            $idx++;
+function groupChannelViewingPeriods(array $arguments): array
+{
+    $channelViewingPeriods = [];
+    $arraySplit = array_chunk(array_slice($arguments, 1), SPLIT_LENGTH);
+    foreach ($arraySplit as $split) {
+        $chan = $split[0];
+        $min = $split[1];
+        //視聴時間を配列に格納する
+        $mins = array($min);
+        if (array_key_exists($chan, $channelViewingPeriods)) {
+            //同じキーにマージする
+            $mins = array_merge($channelViewingPeriods[$chan], $mins);
         }
+        $channelViewingPeriods[$chan] = $mins;
     }
-    //トータルの視聴時間を加算
-    $total += $num;
-    // $sum[$value] = array($num, $idx);
-    $sum[] = array($value, $num, $idx);
+    return $channelViewingPeriods;
 }
 
-//テレビの合計視聴時間
-$total = round($total / ONE_HOUTR, 1);
-echo $total . PHP_EOL;
+function calculateTotalHour(array $channelViewingPeriods): float
+{
+    $viewingTimes = [];
+    foreach ($channelViewingPeriods as $period) {
+        $viewingTimes = array_merge($viewingTimes, $period);
+    }
 
-foreach ($sum as $value) {
-    echo $value[0] . ' ' . $value[1] . ' ' . $value[2] . PHP_EOL;
+    //実はこれ一行でsumを求めることも出来る ...は配列を展開しているよ
+    //array_sum(array_merge(...$channelViewingPeriods));
+    $totalMin = array_sum($viewingTimes);
+    return round($totalMin / 60, 1);
 }
+
+function display(array $channelViewingPeriods): void
+{
+    $totalHour = calculateTotalHour($channelViewingPeriods);
+    echo $totalHour . PHP_EOL;
+    foreach ($channelViewingPeriods as $chan => $mins) {
+        echo $chan . ' ' . array_sum($mins) . ' ' . count($mins) . PHP_EOL;
+    }
+}
+
+
+//入力値を受け取る
+$arguments = getArgument();
+//入力値から扱いやすいように配列を分解する
+$channelViewingPeriods = groupChannelViewingPeriods($arguments);
+
+display($channelViewingPeriods);
