@@ -6,9 +6,5 @@
 //     $viewingTimes = array_merge($viewingTimes, $period);
 //     var_dump($viewingTimes);
 // }
-
-$viewingTimes = [];
-$periods = [10, 20, 30];
-$periods2 = [40, 50, 60];
-$viewingTimes = array_merge($periods, $periods2);
-var_dump($viewingTimes);
+const price = 100;
+if ($v === 1) echo 'Hello';
