@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ruleset name="Custom PSR12">
+<description>A custom PSR12</description>
+<file>./</file>
+<!-- ./vendor/以下のファイルは検査対象としない -->
+<exclude-pattern>./vendor/*</exclude-pattern>
+ <arg name="colors"/>
+ <arg value="s"/>
+ <rule ref="PSR12"/>s
+</ruleset>
