@@ -6,5 +6,7 @@
 //     $viewingTimes = array_merge($viewingTimes, $period);
 //     var_dump($viewingTimes);
 // }
-const price = 100;
-if ($v === 1) echo 'Hello';
+function sayHello($argString)
+{
+    echo "Hello" . $argString . PHP_EOL;
+}
