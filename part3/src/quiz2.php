@@ -51,48 +51,47 @@ function getArgument(): array
 
 function groupChannelViewingPeriods(array $arguments): array
 {
-    $channelViewingPeriods = [];
+    $chanViewingPeriods = [];
     $arraySplit = array_chunk(array_slice($arguments, 1), SPLIT_LENGTH);
     foreach ($arraySplit as $split) {
         $chan = $split[0];
         $min = $split[1];
         //視聴時間を配列に格納する
         $mins = array($min);
-        if (array_key_exists($chan, $channelViewingPeriods)) {
+        if (array_key_exists($chan, $chanViewingPeriods)) {
             //同じキーにマージする
-            $mins = array_merge($channelViewingPeriods[$chan], $mins);
+            $mins = array_merge($chanViewingPeriods[$chan], $mins);
         }
-        $channelViewingPeriods[$chan] = $mins;
+        $chanViewingPeriods[$chan] = $mins;
     }
-    return $channelViewingPeriods;
+    return $chanViewingPeriods;
 }
 
-function calculateTotalHour(array $channelViewingPeriods): float
+function calculateTotalHour(array $chanViewingPeriods): float
 {
     $viewingTimes = [];
-    foreach ($channelViewingPeriods as $period) {
+    foreach ($chanViewingPeriods as $period) {
         $viewingTimes = array_merge($viewingTimes, $period);
     }
 
     //実はこれ一行でsumを求めることも出来る ...は配列を展開しているよ
-    //array_sum(array_merge(...$channelViewingPeriods));
+    //array_sum(array_merge(...$chanViewingPeriods));
     $totalMin = array_sum($viewingTimes);
     return round($totalMin / 60, 1);
 }
 
-function display(array $channelViewingPeriods): void
+function display(array $chanViewingPeriods): void
 {
-    $totalHour = calculateTotalHour($channelViewingPeriods);
+    $totalHour = calculateTotalHour($chanViewingPeriods);
     echo $totalHour . PHP_EOL;
-    foreach ($channelViewingPeriods as $chan => $mins) {
+    foreach ($chanViewingPeriods as $chan => $mins) {
         echo $chan . ' ' . array_sum($mins) . ' ' . count($mins) . PHP_EOL;
     }
 }
 
-
 //入力値を受け取る
 $arguments = getArgument();
 //入力値から扱いやすいように配列を分解する
-$channelViewingPeriods = groupChannelViewingPeriods($arguments);
+$chanViewingPeriods = groupChannelViewingPeriods($arguments);
 
-display($channelViewingPeriods);
+display($chanViewingPeriods);
