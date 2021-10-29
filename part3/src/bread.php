@@ -71,13 +71,17 @@ function editData($inputs) {
 //メニュー番号を返す
 function outputMenuNo(array $sumData, int $mode): string {
     $outputNo = '';
-    if ($mode === MODE_MAX) {
-        //一番売れたメニュー番号を出力
-        $menus = array_keys($sumData, max($sumData));
-    } else {
-        //一番売れなかったメニュー番号を出力
-        $menus = array_keys($sumData, min($sumData));
-    }
+    switch ($mode) {
+        case MODE_MAX:
+            //一番売れたメニュー番号を出力
+            $menus = array_keys($sumData, max($sumData));
+            break;
+        case MODE_MIN:
+            //一番売れなかったメニュー番号を出力
+            $menus = array_keys($sumData, min($sumData));
+            break;
+    } 
+    
     foreach($menus as $menu) {
         $outputNo = trim($outputNo . ' ' . $menu);
     }
