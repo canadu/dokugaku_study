@@ -1,0 +1,11 @@
+<phpunit colors="true" 
+         verbose="true"
+         bootstrap="vendor/autoload.php">
+<!-- 　どのディレクトリやファイルをテストするか -->
+  <testsuites>
+    <testsuite name="Tests">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+
+</phpunit>
