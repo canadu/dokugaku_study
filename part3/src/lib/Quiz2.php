@@ -91,13 +91,9 @@ function display(array $chanViewingPeriods): void
 
 function exeCute(array $arguments)
 {
-    //$arguments = explode(' ', $arg);
-    //入力値を受け取る
     //$arguments = getArgument();
     //入力値から扱いやすいように配列を分解する
     $chanViewingPeriods = groupChannelViewingPeriods($arguments);
     display($chanViewingPeriods);
 }
-
-// var_dump($_SERVER['argv']);
 exeCute($_SERVER['argv']);
