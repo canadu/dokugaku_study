@@ -1,4 +1,5 @@
 <?php
+
 // あなたは小さなパン屋を営んでいました。一日の終りに売上の集計作業を行います。
 // 商品は10種類あり、それぞれ金額は以下の通りです（税抜）。
 
@@ -47,20 +48,22 @@
 const SPLIT_LENGTH = 2;
 const MODE_MAX = 0;
 const MODE_MIN = 1;
-define('MENUES', array('1'=>100,'2'=>120,'3'=>150,'4'=>250,'5'=>80,'6'=>120,'7'=>100,'8'=>180,'9'=>50,'10'=>300));
+define('MENUES', array('1' => 100, '2' => 120, '3' => 150, '4' => 250, '5' => 80, '6' => 120, '7' => 100, '8' => 180, '9' => 50, '10' => 300));
 
 //入力値を返す
-function getInput() {
+function getInput()
+{
     $inputs = $_SERVER['argv'];
     return $inputs;
 }
 
 //商品番号毎に販売個数を取得する
-function editData($inputs) {
+function editData($inputs)
+{
     $sumData = [];
     $forEachOrders = array_chunk(array_slice($inputs, 1), SPLIT_LENGTH);
     //商品毎の購入個数を足し算
-    foreach($forEachOrders as $order) {
+    foreach ($forEachOrders as $order) {
         $menuNo = $order[0]; //購入メニュー番号
         $piece = $order[1]; //購入個数
         $sumData[$menuNo] += $piece;
@@ -69,7 +72,8 @@ function editData($inputs) {
 }
 
 //メニュー番号を返す
-function outputMenuNo(array $sumData, int $mode): string {
+function outputMenuNo(array $sumData, int $mode): string
+{
     $outputNo = '';
     switch ($mode) {
         case MODE_MAX:
@@ -80,17 +84,18 @@ function outputMenuNo(array $sumData, int $mode): string {
             //一番売れなかったメニュー番号を出力
             $menus = array_keys($sumData, min($sumData));
             break;
-    } 
-    
-    foreach($menus as $menu) {
+    }
+
+    foreach ($menus as $menu) {
         $outputNo = trim($outputNo . ' ' . $menu);
     }
     return $outputNo;
 }
 
 //販売金額を計算する
-function outputCalcData($sumData) {
-    
+function outputCalcData($sumData)
+{
+
     $total = 0;
 
     foreach ($sumData as $key => $value) {
@@ -98,13 +103,12 @@ function outputCalcData($sumData) {
     }
     $total = ($total * 1.1);
     echo $total . PHP_EOL;
-    
+
     $outputNo = outputMenuNo($sumData, MODE_MAX);
     echo $outputNo . PHP_EOL;
 
     $outputNo = outputMenuNo($sumData, MODE_MIN);
-    echo $outputNo . PHP_EOL; 
-   
+    echo $outputNo . PHP_EOL;
 }
 
 //入力値を受け取る
@@ -115,4 +119,3 @@ $sumData = editData($inputs);
 
 //計算して出力する
 outputCalcData($sumData);
-
