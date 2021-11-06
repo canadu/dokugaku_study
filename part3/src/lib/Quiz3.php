@@ -1,4 +1,5 @@
 <?php
+
 // 【クイズ】スーパーの支払金額
 
 // ◯お題
@@ -33,80 +34,103 @@
 
 // ◯実行例
 // calc('21:00', [1, 1, 1, 3, 5, 7, 8, 9, 10])  //=> 1298
-define('ARTICLE', [1=>'100',2=>'150',3=>'200',4=>'350',5=>'180',6=>'220',7=>'440',8=>'380',9=>'80',10=>'100']);
-$blnSale = false;
-$onionCount = 0;
-const ONION_NO = 1;// 玉ねぎ
-const KA_BENTO_NO = 7;//唐揚げ弁当
-const NO_BENTO_NO = 8;//のり弁当
-const TEA_NO = 9;//お茶
-const COFFEE_NO = 10;//コーヒー
+
+define('ARTICLE', [
+    1 => '100', 2 => '150', 3 => '200',
+    4 => '350', 5 => '180', 6 => '220',
+    7 => '440', 8 => '380', 9 => '80',
+    10 => '100'
+]);
+
+const ONION_NO = 1; // 玉ねぎ
+const KA_BENTO_NO = 7; //唐揚げ弁当
+const NO_BENTO_NO = 8; //のり弁当
+const TEA_NO = 9; //お茶
+const COFFEE_NO = 10; //コーヒー
 
 //購入時刻がセール時間内かどうか確認する
-function chekSaletime(string $argTime):bool {
+function chekSaletime(string $argTime): bool
+{
     //タイムセール時間内かチェックする
     $dateFrom = strtotime('20:00');
     $dateTo = strtotime('23:00');
     $nowTime = strtotime($argTime);
+    $result = (bool)false;
     if ($dateFrom <= $nowTime && $nowTime <= $dateTo) {
-        return (bool)true;
-    } else {
-        return (bool)false;
+        $result = (bool)true;
     }
+    return $result;
 }
 
 //玉ねぎ分を減額するために計算を行う
-function onionCalc(int $cnt):float {
+function onionCalc(int $cnt): float
+{
     $disCount = 0;
-    if (($cnt % 5) === 0) {  
-      $disCount = floor($cnt / 5) * 100; 
+    if (($cnt % 5) === 0) {
+        $disCount = floor($cnt / 5) * 100;
     } elseif (($cnt % 3) === 0) {
-      //50円の割引
-      $disCount = floor($cnt / 3) * 50;
+        //50円の割引
+        $disCount = floor($cnt / 3) * 50;
     }
     return $disCount;
 }
 
-function calc(string $argTime, array $argNos) :string {
-    
-    $total = 0;
-    
+/**
+ * @param string $argTime
+ * @param array<int> $argNos
+ */
+function calc(string $argTime, array $argNos): int
+{
+    $blnSale = false;
     //セールか確認する
     if (chekSaletime($argTime)) {
         $blnSale = true;
     }
 
-    foreach($argNos as $argNo) {
+    $onionCount = 0;
+    $bentCnt = 0;
+    $drinkCnt = 0;
+    $totalFee = 0;
+
+    foreach ($argNos as $argNo) {
         switch ($argNo) {
             case ONION_NO:
-                $onionCount += 1;
+                $onionCount++;
                 //減額は後で行う
-                $total += ARTICLE[$argNo];
+                $totalFee += ARTICLE[$argNo];
                 break;
             case KA_BENTO_NO:
             case NO_BENTO_NO:
                 if ($blnSale) {
                     //セールの場合
-                    $total += ARTICLE[$argNo] / 2;
-                } else {    
+                    $totalFee += ARTICLE[$argNo] / 2;
+                } else {
                     //セールでない場合
-                    $total += ARTICLE[$argNo];
+                    $totalFee += ARTICLE[$argNo];
                 }
-                break; 
+                $bentCnt++;
+                break;
             case TEA_NO:
             case COFFEE_NO:
-                $total += ARTICLE[$argNo];
+                $totalFee += ARTICLE[$argNo];
+                $drinkCnt++;
                 break;
             default:
-                $total += ARTICLE[$argNo];
+                $totalFee += ARTICLE[$argNo];
         }
     }
-    //玉ねぎ分の減額を行う
-    $total -= onionCalc($onionCount);
-    //消費税の計算を行う
-    $total *= 1.1;
-    return $total; 
-}
 
+    //弁当とドリンクの同時購入分は割引を行う
+    $arrayCnt = ['bento' => $bentCnt, 'drink' => $drinkCnt];
+    $totalFee -= min($arrayCnt) * 20;
+
+    //玉ねぎ分の割引を行う
+    $totalFee -= onionCalc($onionCount);
+
+    //消費税の計算を行う
+    $totalFee *= 1.1;
+
+    return $totalFee;
+}
 //実行
 echo calc('21:00', [1, 1, 1, 3, 5, 7, 8, 9, 10]) . PHP_EOL;
