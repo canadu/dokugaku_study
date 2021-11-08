@@ -1,1 +1,1 @@
-{"version":1,"defects":{"Quiz2Test::testCalc":3,"Quiz3Test::testCalc":3},"times":{"MathTest::testDouble":0.024,"Quiz2Test::testCalc":0.002,"Quiz3Test::testCalc":0}}
+{"version":1,"defects":{"Quiz2Test::testCalc":3,"Quiz3Test::testCalc":3,"Quiz4Test::testJudge":4},"times":{"MathTest::testDouble":0.004,"Quiz2Test::testCalc":0,"Quiz3Test::testCalc":0,"Quiz4Test::testJudge":0.003,"Quiz5Test::testshowDown":0.002}}
