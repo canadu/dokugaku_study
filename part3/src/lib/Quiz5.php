@@ -131,8 +131,6 @@ function decideWinner(array $hand1, array $hand2): int
     return 0;
 }
 
-showDown('CK', 'DJ', 'C10', 'H10');
-
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //エースは１番強いので基本14として扱うが、カードの組み合わせによっては弱くなる
 // define('CARD', [
