@@ -57,6 +57,7 @@ const HAND_RANK = [
     PAIR => 2,
     STRAIGHT => 3,
 ];
+
 define('CARD_RANK', (function () {
     $cardRanks = [];
     foreach (CARDS as $index => $card) {
@@ -64,12 +65,15 @@ define('CARD_RANK', (function () {
     }
     return $cardRanks;
 })());
+
 function showDown(string $card11, string $card12, string $card21, string $card22): array
 {
     //カードのランクを取得する
     $cardRanks = convertToCardRanks([$card11, $card12, $card21, $card22]);
+    //print_r($cardRanks);
     //プレイヤー毎に配列を分割
     $playerCardRanks = array_chunk($cardRanks, 2);
+    //print_r($playerCardRanks);
     //プレイヤー毎に役を取得する
     $hands = array_map(fn ($playerCardRanks) => checkHand($playerCardRanks[0], $playerCardRanks[1]), $playerCardRanks);
     //勝者を決定する
@@ -84,7 +88,9 @@ function checkHand(int $cardRank1, int $cardRank2): array
 {
     //役を決定する
     $primary = max($cardRank1, $cardRank2);
+    //var_dump($primary) . PHP_EOL;
     $secondary = min($cardRank1, $cardRank2);
+    //var_dump($secondary) . PHP_EOL;
     $name = HIGH_CARD;
     if (isStraight($cardRank1, $cardRank2)) {
         //ストレートの場合
@@ -98,12 +104,11 @@ function checkHand(int $cardRank1, int $cardRank2): array
         //ペアーの場合
         $name = PAIR;
     }
-    return [
-        'name' => $name,
-        'rank' => HAND_RANK[$name],
-        'primary' => $primary,
-        'secondary' => $secondary,
-    ];
+    return ['name' => $name,
+            'rank' => HAND_RANK[$name],
+            'primary' => $primary,
+            'secondary' => $secondary,
+        ];
 }
 function isStraight(int $cardRank1, int $cardRank2): bool
 {
@@ -111,6 +116,8 @@ function isStraight(int $cardRank1, int $cardRank2): bool
 }
 function isMinMax(int $cardRank1, int $cardRank2): bool
 {
+    //var_dump(max(CARD_RANK)) . PHP_EOL;
+    //var_dump(min(CARD_RANK)) . PHP_EOL;
     return abs(abs($cardRank1 - $cardRank2)) === (max(CARD_RANK) - min(CARD_RANK));
 }
 function isPair(int $cardRank1, int $cardRank2): bool
@@ -131,6 +138,7 @@ function decideWinner(array $hand1, array $hand2): int
     return 0;
 }
 
+showDown('CK', 'DJ', 'C3', 'H4');
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //エースは１番強いので基本14として扱うが、カードの組み合わせによっては弱くなる
 // define('CARD', [
