@@ -57,8 +57,6 @@ const HAND_RANK = [
     PAIR => 2,
     STRAIGHT => 3,
 ];
-
-
 define('CARD_RANK', (function () {
     $cardRanks = [];
     foreach (CARDS as $index => $card) {
@@ -66,13 +64,15 @@ define('CARD_RANK', (function () {
     }
     return $cardRanks;
 })());
-
-
 function showDown(string $card11, string $card12, string $card21, string $card22): array
 {
+    //カードのランクを取得する
     $cardRanks = convertToCardRanks([$card11, $card12, $card21, $card22]);
+    //プレイヤー毎に配列を分割
     $playerCardRanks = array_chunk($cardRanks, 2);
+    //プレイヤー毎に役を取得する
     $hands = array_map(fn ($playerCardRanks) => checkHand($playerCardRanks[0], $playerCardRanks[1]), $playerCardRanks);
+    //勝者を決定する
     $winner = decideWinner($hands[0], $hands[1]);
     return [$hands[0]['name'], $hands[1]['name'], $winner];
 }
@@ -82,16 +82,20 @@ function convertToCardRanks(array $cards): array
 }
 function checkHand(int $cardRank1, int $cardRank2): array
 {
+    //役を決定する
     $primary = max($cardRank1, $cardRank2);
     $secondary = min($cardRank1, $cardRank2);
     $name = HIGH_CARD;
     if (isStraight($cardRank1, $cardRank2)) {
+        //ストレートの場合
         $name = STRAIGHT;
         if (isMinMax($cardRank1, $cardRank2)) {
+            //A-2の組み合わせの場合は最大値と最小値を入れ替え
             $primary = min(CARD_RANK);
             $secondary = max(CARD_RANK);
         }
     } elseif (isPair($cardRank1, $cardRank2)) {
+        //ペアーの場合
         $name = PAIR;
     }
     return [
@@ -115,6 +119,7 @@ function isPair(int $cardRank1, int $cardRank2): bool
 }
 function decideWinner(array $hand1, array $hand2): int
 {
+    //勝者を決定する
     foreach (['rank', 'primary', 'secondary'] as $k) {
         if ($hand1[$k] > $hand2[$k]) {
             return 1;
@@ -125,6 +130,8 @@ function decideWinner(array $hand1, array $hand2): int
     }
     return 0;
 }
+
+showDown('CK', 'DJ', 'C10', 'H10');
 
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //エースは１番強いので基本14として扱うが、カードの組み合わせによっては弱くなる
