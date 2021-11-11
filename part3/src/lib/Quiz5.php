@@ -75,7 +75,8 @@ function showDown(string $card11, string $card12, string $card21, string $card22
     $playerCardRanks = array_chunk($cardRanks, 2);
     //print_r($playerCardRanks);
     //プレイヤー毎に役を取得する
-    $hands = array_map(fn ($playerCardRanks) => checkHand($playerCardRanks[0], $playerCardRanks[1]), $playerCardRanks);
+    //$hands = array_map(fn ($playerCardRanks) => checkHand($playerCardRanks[0], $playerCardRanks[1]), $playerCardRanks);
+    $hands = array_map(fn ($playerCardRanks) =>s checkHand($playerCardRanks[0], $playerCardRanks[1]), $playerCardRanks);
     //勝者を決定する
     $winner = decideWinner($hands[0], $hands[1]);
     return [$hands[0]['name'], $hands[1]['name'], $winner];
@@ -104,11 +105,12 @@ function checkHand(int $cardRank1, int $cardRank2): array
         //ペアーの場合
         $name = PAIR;
     }
-    return ['name' => $name,
-            'rank' => HAND_RANK[$name],
-            'primary' => $primary,
-            'secondary' => $secondary,
-        ];
+    return [
+        'name' => $name,
+        'rank' => HAND_RANK[$name],
+        'primary' => $primary,
+        'secondary' => $secondary,
+    ];
 }
 function isStraight(int $cardRank1, int $cardRank2): bool
 {
