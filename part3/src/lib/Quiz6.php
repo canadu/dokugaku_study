@@ -29,4 +29,4 @@ function convertToNumber(string ...$cards): array
 {
     $rtnNumber = array_map(fn ($card) => substr($card, 1, strlen($card) - 1), $cards);
     return $rtnNumber;
-} 
+}
