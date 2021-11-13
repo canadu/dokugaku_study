@@ -6,8 +6,12 @@
 // ・役の仕様は下記に変更します。役は番号が大きくなるほど強くなります
 
 // 1、ハイカード：以下の役が一つも成立していない
+
 // 2、ペア：2枚のカードが同じ数字
-// 3、ストレート：3枚のカードが連続している。A は 2 と K の両方と連続しているとみなし、A を含むストレート は、A-2-3 と Q-K-A の2つ。ただし、K-A-2 のランクの組み合わせはストレートとはみなさない
+
+// 3、ストレート：3枚のカードが連続している。A は 2 と K の両方と連続しているとみなし、A を含むストレート は、A-2-3 と Q-K-A の2つ。
+//    ただし、K-A-2 のランクの組み合わせはストレートとはみなさない
+
 // 4、スリーカード：3枚のカードが同じ数字・2つの手札について、強さは以下に従います
 // 5、2つの手札の役が異なる場合、より上位の役を持つ手札が強いものとする
 // 6、2つの手札の役が同じ場合、各カードの数値によって強さを比較する
@@ -49,7 +53,142 @@
 // show('SK', 'CK', 'DK', 'CA', 'HA', 'SA')     //=> ['three card', 'three card', 2]
 // show('S2', 'C2', 'D2', 'C3', 'H3', 'S3')     //=> ['three card', 'three card', 2]
 
+
+const CARDS = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+const HIGH_CARD = 'high card';
+const PAIR = 'pair';
+const STRAIGHT = 'straight';
+const THREE = 'three card';
+const HAND_RANK = [
+    HIGH_CARD => 1,
+    PAIR => 2,
+    STRAIGHT => 3,
+    THREE => 4,
+];
+
+define('CARD_RANK', (function () {
+    $cardRanks = [];
+    foreach (CARDS as $index => $card) {
+        $cardRanks[$card] = $index;
+    }
+    return $cardRanks;
+})());
+
 function show(string $card11, string $card12, string $card13, string $card21, string $card22, string $card23): array
 {
-    return ['high card', 'pair', 2];
+    //カードのランクを取得する
+    $cardRanks = convertToCardRanks([$card11, $card12, $card13, $card21, $card22, $card23]);
+    //プレイヤー毎に配列を分割
+    $playerCardRanks = array_chunk($cardRanks, 3);
+    // print_r($playerCardRanks);
+    //プレイヤー毎に役を取得する
+    $hands = array_map(fn ($playerCardRanks) => checkHand($playerCardRanks[0], $playerCardRanks[1], $playerCardRanks[2]), $playerCardRanks);
+    //勝者を決定する
+    $winner = decideWinner($hands[0], $hands[1]);
+    print_r([$hands[0]['name'], $hands[1]['name'], $winner]);
+    return [$hands[0]['name'], $hands[1]['name'], $winner];
+    // return ['high card', 'pair', 2];
+}
+
+function convertToCardRanks(array $cards): array
+{
+    return array_map(fn ($card) => CARD_RANK[substr($card, 1, strlen($card) - 1)], $cards);
+}
+function checkHand(int $cardRank1, int $cardRank2, int $cardRank3): array
+{
+    //役を決定する
+    //$sortCardRank = arsort([$cardRank1, $cardRank2, $cardRank3], SORT_NUMERIC);
+    $arrayCardRank = array($cardRank1, $cardRank2, $cardRank3);
+    rsort($arrayCardRank, SORT_NUMERIC);
+    // print_r($arrayCardRank);
+
+    $primary = $arrayCardRank[0];
+    // var_dump($primary) . PHP_EOL;
+    $secondary = $arrayCardRank[1];
+    // var_dump($secondary) . PHP_EOL;
+    $third = $arrayCardRank[2];
+    // var_dump($third) . PHP_EOL;
+    $name = HIGH_CARD;
+
+    if (isStraight($primary, $secondary, $third)) {
+        //ストレートの場合
+        $name = STRAIGHT;
+        if (isStraightChangeMinMaxCase($primary, $secondary, $third)) {
+            //A-2-3の組み合わせの場合は３が一番強くなるので順番を入れ替え
+            $primary = $cardRank2;
+            $secondary = $cardRank1;
+            $third = $cardRank1;
+        }
+    } elseif (isThree($primary, $secondary, $third)) {
+        //スリーカードの場合
+        $name = THREE;
+    } elseif (isPair($primary, $secondary, $third)) {
+        //ペアーの場合
+        $name = PAIR;
+    }
+    return [
+        'name' => $name,
+        'rank' => HAND_RANK[$name],
+        'primary' => $primary,
+        'secondary' => $secondary,
+        'third' => $third,
+    ];
+}
+function isStraight(int $cardRank1, int $cardRank2, int $cardRank3): bool
+{
+    //$sortCardRank = arsort([$cardRank1, $cardRank2, $cardRank3], SORT_NUMERIC);
+    // 3、ストレート：3枚のカードが連続している。A は 2 と K の両方と連続しているとみなし、A を含むストレート は、A-2-3 と Q-K-A の2つ。
+    //    ただし、K-A-2 のランクの組み合わせはストレートとはみなさない
+
+    if (isStraigthExceptCase($cardRank1, $cardRank2, $cardRank3)) {
+        //K-A-2の場合
+        return false;
+    } elseif (abs($cardRank1 - $cardRank2) === 1 && abs($cardRank2 - $cardRank3 === 1)) {
+        return true;
+    } else {
+        if (isStraightChangeMinMaxCase($cardRank1, $cardRank2, $cardRank3)) {
+            //A-2-3の場合
+            return true;
+        }
+        return false;
+    }
+}
+function isStraigthExceptCase(int $cardRank1, int $cardRank2, int $cardRank3): bool
+{
+    //K-A-2の組み合わせはストレートとは見なさない
+    return abs($cardRank1 - $cardRank2) === 1 && abs($cardRank2 - $cardRank3 == 11);
+}
+function isStraightChangeMinMaxCase(int $cardRank1, int $cardRank2, int $cardRank3): bool
+{
+    //A-2-3の場合
+    return (abs($cardRank1 - $cardRank2) === 11 && abs($cardRank2 - $cardRank3 === 1));
+}
+function isMinMax(int $cardRank1, int $cardRank2): bool
+{
+    //var_dump(max(CARD_RANK)) . PHP_EOL;
+    //var_dump(min(CARD_RANK)) . PHP_EOL;
+    return abs(abs($cardRank1 - $cardRank2)) === (max(CARD_RANK) - min(CARD_RANK));
+}
+function isPair(int $cardRank1, int $cardRank2, int $cardRank3): bool
+{
+    if (($cardRank1 === $cardRank2) || ($cardRank1 === $cardRank3) || ($cardRank2 === $cardRank3)) {
+        return true;
+    } else return false;
+}
+function isThree(int $cardRank1, int $cardRank2, int $cardRank3): bool
+{
+    return ($cardRank1 === $cardRank2)  && ($cardRank2 === $cardRank3);
+}
+function decideWinner(array $hand1, array $hand2): int
+{
+    //勝者を決定する
+    foreach (['rank', 'primary', 'secondary', 'third'] as $k) {
+        if ($hand1[$k] > $hand2[$k]) {
+            return 1;
+        }
+        if ($hand1[$k] < $hand2[$k]) {
+            return 2;
+        }
+    }
+    return 0;
 }
