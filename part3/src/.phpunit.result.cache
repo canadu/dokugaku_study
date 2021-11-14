@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"version":1,"defects":{"Quiz7Test::testshow":3},"times":{"Quiz7Test::testshow":0.083}}
+=======
+{"version":1,"defects":{"Quiz2Test::testCalc":3,"Quiz3Test::testCalc":3,"Quiz4Test::testJudge":4,"Quiz5Test::testshowDown":3},"times":{"MathTest::testDouble":0.004,"Quiz2Test::testCalc":0,"Quiz3Test::testCalc":0,"Quiz4Test::testJudge":0.003,"Quiz5Test::testshowDown":0.048,"Quiz6Test::testconvertToNumber":0.002}}
+>>>>>>> c68cc60 (1112)
