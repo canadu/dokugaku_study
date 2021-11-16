@@ -172,7 +172,7 @@ function isStraight(int $cardRank1, int $cardRank2, int $cardRank3 = -1): bool
         return abs($cardRank1 - $cardRank2) === 1 || isMinMax($cardRank1, $cardRank2);
     } else {
         //カードが3枚のとき
-        if (isStraigthExceptCase($cardRank1, $cardRank2, $cardRank3)) {
+        if (isStraightExceptCase($cardRank1, $cardRank2, $cardRank3)) {
             //K-A-2の場合
             return false;
         } elseif (abs($cardRank1 - $cardRank2) === 1 && abs($cardRank2 - $cardRank3) === 1) {
@@ -192,7 +192,7 @@ function isStraight(int $cardRank1, int $cardRank2, int $cardRank3 = -1): bool
  * @param int $cardRank3
  * @return bool
  */
-function isStraigthExceptCase(int $cardRank1, int $cardRank2, int $cardRank3): bool
+function isStraightExceptCase(int $cardRank1, int $cardRank2, int $cardRank3): bool
 {
     //K-A-2の組み合わせはストレートとは見なさない
     return abs($cardRank1 - $cardRank2) === 1 && abs($cardRank2 - $cardRank3) == 11;
