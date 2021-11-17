@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+
 require_once(__DIR__ . '/../lib/vending_machine/VendingMachine2.php');
 
 class VendingMachineTest2 extends TestCase
@@ -21,7 +22,7 @@ class VendingMachineTest2 extends TestCase
         $this->assertSame('', $vendingMachine->pressButton());
 
         // 100円を入れた場合はジュースを購入できる
-        $this->assertSame('cider', $vendingMachine->pressButton());
         $vendingMachine->depositCoin(100);
+        $this->assertSame('cider', $vendingMachine->pressButton());
     }
 }

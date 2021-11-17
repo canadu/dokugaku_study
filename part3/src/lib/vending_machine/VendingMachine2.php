@@ -9,10 +9,21 @@
 
 // ◯テスト例
 // 次のテストが通るようにコードを書きましょう。
+
+use VendingMachine as GlobalVendingMachine;
+
 class VendingMachine
 {
     private const PRICE_OF_DRINK = 100;
     private int $depositCoin = 0;
+
+    public function depositCoin(int $money): int
+    {
+        if ($money === 100) {
+            $this->depositCoin += $money;
+        }
+        return $this->depositCoin;
+    }
 
     function pressButton(): string
     {
@@ -23,12 +34,7 @@ class VendingMachine
             return '';
         }
     }
-    public function depositCoin(int $money) : int
-	{
-        if ($money === 100) {
-            $this->depositedCoin += $money;
-        }
-        return $this->depositedCoin;
-	}
-
 }
+$vendingMachine = new VendingMachine();
+$vendingMachine->depositCoin(100);
+echo $vendingMachine->pressButton();

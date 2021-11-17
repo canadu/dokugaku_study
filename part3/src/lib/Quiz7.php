@@ -116,7 +116,7 @@ function checkHand(int $cardRank1, int $cardRank2, int $cardRank3): array
         if (isStraightChangeMinMaxCase($primary, $secondary, $third)) {
             //A-2-3の組み合わせの場合は３が一番強くなるので順番を入れ替え
             $primary = $cardRank2;
-            $secondary = $cardRank1;
+            $secondary = $cardRank3;
             $third = $cardRank1;
         }
     } elseif (isThree($primary, $secondary, $third)) {
