@@ -1,1 +1,1 @@
-{"version":1,"defects":{"PokerGameTest::testStart":4},"times":{"Quiz7Test::testshow":0.056,"PokerGameTest::testStart":0.002}}
+{"version":1,"defects":{"PokerGameTest::testStart":4,"VendingMachineTest2::testPressButton":3,"VendingMachineTest2::testDepositCoin":4},"times":{"Quiz7Test::testshow":0.056,"PokerGameTest::testStart":0.003,"VendingMachineTest::testPressButton":0.003,"VendingMachineTest2::testPressButton":0.001,"PokerGameTest2::testStart":0.003,"VendingMachineTest2::testDepositCoin":0.003}}

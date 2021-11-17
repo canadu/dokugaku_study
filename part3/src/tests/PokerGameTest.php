@@ -6,7 +6,7 @@ class PokerGameTest extends TestCase
 {
     function testStart()
     {
-        $game = new PokerGame(['CA', 'DA']);
-        $this->assertSame(['CA', 'DA'], $game->start());
+        $cards = new PokerGame(['CA', 'DA']);
+        $this->assertSame(['CA', 'DA'], $cards->start());
     }
 }
