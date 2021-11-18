@@ -12,7 +12,7 @@ class Deck
                 $this->cards[] = new Card($suit, $number);
             }
         }
-        //カードをシャッフるする
+        //カードをシャッフルする
     }
     public function drawCards(int $drawNum)
     {
