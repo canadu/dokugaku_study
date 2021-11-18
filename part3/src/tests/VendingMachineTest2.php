@@ -6,13 +6,13 @@ require_once(__DIR__ . '/../lib/vending_machine/VendingMachine2.php');
 
 class VendingMachineTest2 extends TestCase
 {
-    public function testDepositCoin()
-    {
-        $vendingMachine = new VendingMachine();
-        $this->assertSame(0, $vendingMachine->depositCoin(0));
-        $this->assertSame(0, $vendingMachine->depositCoin(150));
-        $this->assertSame(100, $vendingMachine->depositCoin(100));
-    }
+    // public function testDepositCoin()
+    // {
+    //     $vendingMachine = new VendingMachine();
+    //     $this->assertSame(0, $vendingMachine->depositCoin(0));
+    //     $this->assertSame(0, $vendingMachine->depositCoin(150));
+    //     $this->assertSame(100, $vendingMachine->depositCoin(100));
+    // }
 
     public function testPressButton()
     {
