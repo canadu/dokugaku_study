@@ -37,8 +37,10 @@ if (isset($_POST['change_qty'])) {
     $id = htmlspecialchars($id, ENT_QUOTES);
     $qty = htmlspecialchars($qty, ENT_QUOTES);
     if ((int)$qty !== 0) {
+        //ゼロ以外の場合
         $_SESSION['cart'][$id]['qty'] = $qty;
     } else {
+        //ゼロの場合
         unset($_SESSION['cart'][$id]);
     }
 }
