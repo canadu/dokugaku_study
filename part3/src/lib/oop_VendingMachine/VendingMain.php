@@ -8,11 +8,4 @@
 // テスト駆動で開発しましょう。
 // 今回は設計にトライしてもらいたいので、テスト例は省略します。
 
-require_once('VendingBuyer.php');
-$buyer =  new Buyer;
-$machine =  new VendingMachine();
-$machine->depositCoin([100]);
-$machine->kindDrink = 'cider';
-$drink = $buyer->pressButton($machine);
-var_dump($drink);
 ?>

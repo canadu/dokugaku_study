@@ -1,54 +1,53 @@
 <?php
 
-class VendingMachine{
+// ◯お題
 
-    private const PRICE_OF_DRINK_CIDER = 100;
-    private const PRICE_OF_DRINK_COLA = 200;
+// 自動販売機プログラムで以下の仕様変更がありました。
+// １、カップコーヒー（カップに注ぐコーヒー）のアイスとホットも選択できるようにします。値段はどちらも100円です
+// ２、カップの在庫管理も行ってください。カップコーヒーが一つ注文されるとカップも在庫から一つ減ります。自動販売機が保持できるカップ数は最大100個とします
+// ３、カップを追加できるようにしてください
 
-    private const DRINK_NAME_COLA = 'cola';
-    private const DRINK_NAME_CIDER = 'cider';
+require_once(__DIR__ . '/Item.php');
 
-    public string $kindDrink = '';
-    public int $depositCoin = 0;
+class VendingMachine
+{
+    private int $depositedCoin = 0;
+    private int $cupNumber = 0;
 
-    // public function __construct(private string $kindDrink) 
-    // {        
-    // }
+    private const MAX_CUP_NUMBER = 100;
 
-    public function depositCoin(array $moneys): int
+    public function depositCoin(int $coinAmount): int
     {
-        $this->depositCoin = 0;
-        foreach($moneys as $money) {
-            if ($money === 100) {
-                $this->depositCoin += $money;
-            }
+        if ($coinAmount === 100) {
+            $this->depositedCoin += $coinAmount;
         }
-        return $this->depositCoin;
+        return $this->depositedCoin;
     }
 
-    public function purchaseDrink(VendingMachine $machine): string
+    public function pressButton(Item $item): string
     {
-        if ($machine->kindDrink === $this::DRINK_NAME_CIDER) {
-            //サイダー
-            if ($machine->depositCoin >= $this::PRICE_OF_DRINK_CIDER) {
-                $machine->depositCoin -= $this::PRICE_OF_DRINK_CIDER;
-                return $this::DRINK_NAME_CIDER;
-            } else {
-                return '';
-            }
-            $machine->depositCoin -= $this::PRICE_OF_DRINK_CIDER;
-        } elseif ($machine->kindDrink === $this::DRINK_NAME_COLA) {
-            //コーラ
-            if ($machine->depositCoin >= $this::PRICE_OF_DRINK_COLA) {
-                $machine->depositCoin -= $this::PRICE_OF_DRINK_COLA;
-                return $this::DRINK_NAME_COLA;
-            } else {
-                return '';
-            }
+        //値段を取得する
+        $price = $item->getPrice();
+        $cupNumber = $item->getCupNumber();
+        //入金額がジュースの値段以上の場合、入金額からジュース金額を引く
+        if ($this->depositedCoin >= $price && $this->cupNumber >= $cupNumber) {
+            $this->depositedCoin -= $price;
+            $this->cupNumber -= $cupNumber;
+            return $item->getName();
         } else {
             return '';
         }
     }
-}
 
-?>
+    public function addCup(int $num): int
+    {
+        $cupNumber = $this->cupNumber + $num;
+        if ($cupNumber > self::MAX_CUP_NUMBER) {
+            $cupNumber = self::MAX_CUP_NUMBER;
+        }
+        $this->cupNumber = $cupNumber;
+        return $this->cupNumber;
+
+    }
+
+}
