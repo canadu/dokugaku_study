@@ -16,20 +16,34 @@
 // PokerGameTest のテスト例のみ記載します。他のクラスは単一責任の原則に基づいて設計してみてください。
 
 require_once('PokerPlayer.php');
+require_once('PokerHandEvaluator.php');
+require_once('PokerTwoCardRule.php');
+require_once('PokerThreeCardRule.php');
 
-class PokerGame 
+class PokerGame
 {
-    function __construct(private array $cards1, private array $cards2) 
+    public function __construct(private array $cards1, private array $cards2)
     {
     }
-    function start() : array
+
+    public function start(): array
     {
-        $playerCardRanks = [];
+        $hands = [];
         foreach ([$this->cards1, $this->cards2] as $cards) {
             $pokerCards = array_map(fn ($card) => new PokerCard($card), $cards);
-            $player = new PokerPlayer($pokerCards);
-            $playerCardRanks[] = $player->getCardRanks();
+            $rule = $this->getRule($cards);
+            $handEvaluator = new PokerHandEvaluator($rule);
+            $hands[] = $handEvaluator->getHand($pokerCards);
         }
-        return $playerCardRanks;
+        return $hands;
+    }
+
+    private function getRule(array $cards): PokerRule
+    {
+        $rule = new PokerTwoCardRule();
+        if (count($cards) === 3) {
+            $rule = new PokerThreeCardRule();
+        }
+        return $rule;
     }
 }

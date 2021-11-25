@@ -2,7 +2,7 @@
 
 class PokerCard
 {
-    const CARD_RANK = [
+    public const CARD_RANK = [
         '2' => 1,
         '3' => 2,
         '4' => 3,
@@ -15,15 +15,15 @@ class PokerCard
         'J' => 10,
         'Q' => 11,
         'K' => 12,
-        'A' => 13,        
+        'A' => 13,
     ];
+
     public function __construct(private string $suitNumber)
     {
     }
+
     public function getRank(): int
     {
-        //クラスの定数にはself::CONSTANTでアクセスできます
-        var_dump($this->suitNumber);
-        return self::CARD_RANK[substr($this->suitNumber, 1, strlen($this->suitNumber) -1)];
+        return self::CARD_RANK[substr($this->suitNumber, 1, strlen($this->suitNumber) - 1)];
     }
 }
