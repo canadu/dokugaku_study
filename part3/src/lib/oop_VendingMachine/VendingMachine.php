@@ -16,6 +16,7 @@ class VendingMachine
 
     private const MAX_CUP_NUMBER = 100;
 
+    //入金する
     public function depositCoin(int $coinAmount): int
     {
         if ($coinAmount === 100) {
@@ -29,6 +30,7 @@ class VendingMachine
         //値段を取得する
         $price = $item->getPrice();
         $cupNumber = $item->getCupNumber();
+        
         //入金額がジュースの値段以上の場合、入金額からジュース金額を引く
         if ($this->depositedCoin >= $price && $this->cupNumber >= $cupNumber) {
             $this->depositedCoin -= $price;

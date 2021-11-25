@@ -9,6 +9,7 @@ class PokerGameTest extends TestCase
     public function testStart()
     {
         $game = new PokerGame(['CA', 'DA'], ['C10', 'H10']);
-        $this->assertSame([[13, 13], [9, 9]], $game->start());
+        $this->assertSame(['pair', 'straight'], $game->start());
     }
+
 }
