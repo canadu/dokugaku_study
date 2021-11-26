@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="loginId">
             <label for="pass">パスワード</label>
             <input type="password" name="pass">
-            <p = "logBtn"><input type="submit" value="ログイン"></p>
+            <p id="logBtn"><input type="submit" value="ログイン"></p>
         </form>
     </main>
 </body>
