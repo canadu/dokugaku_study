@@ -14,7 +14,7 @@ function db_connect(){
     $dsn = 'mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'] . ';charset=utf8;';
 	try{
 		$dbh = new PDO($dsn, $dbUsername, $dbPassword);
-        return $dbh;
+		return $dbh;
 	}catch (PDOException $e){
         print('Error:'.$e->getMessage());
         die();
