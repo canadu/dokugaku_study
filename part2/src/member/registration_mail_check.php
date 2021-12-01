@@ -66,40 +66,30 @@ $body = <<< EOM
 下記のURLからご登録ください。
 {$url}
 EOM;
-    mb_language("ja");
+    mb_language("Japanese");
     mb_internal_encoding('UTF-8');
 
     //Fromヘッダーを作成
-    $header  = "MIME-Version: 1.0 \n" ;
-    $header .= "From: " .
-        "".mb_encode_mimeheader (mb_convert_encoding($name,"ISO-2022-JP","AUTO")) ."" .
-        "<".$returnMail."> \n";
-    $header .= "Reply-To: " .
-        "".mb_encode_mimeheader (mb_convert_encoding($name,"ISO-2022-JP","AUTO")) ."" .
-        "<".$returnMail."> \n";
+	$header = 'From: ' . mb_encode_mimeheader($name). ' <' . $mail. '>';
 
-    var_dump($header) . PHP_EOL;
-    var_dump($mailTo) . PHP_EOL;
-    var_dump($subject) . PHP_EOL;
-    var_dump($body) . PHP_EOL;
-    var_dump($returnMail) . PHP_EOL;
+    try {
 
-    $sendmail_params  = "-f$returnMail";
-    var_dump($sendmail_params) . PHP_EOL;
+        //if (mb_send_mail($mailTo, $subject, $body, $header, '-f'. $returnMail)) {
+            //セッション変数を全て解除
+            $_SESSION = array();
+            //クッキーの削除
+            if(isset($_COOKIE['PHPSESSID'])) {
+                    setcookie('PHPSESSID','',time() - 1800, '/');
+            }
+            //セッションを破棄する
+            session_destroy();
+            $message = 'メールをお送りしました。';
 
-    if (mb_send_mail($mailTo, $subject, $body, $header, $sendmail_params)) {
-
-        //セッション変数を全て解除
-        $_SESSION = array();
-        //クッキーの削除
-        if(isset($_COOKIE['PHPSESSID'])) {
-                setcookie('PHPSESSID','',time() - 1800, '/');
-        }
-        //セッションを破棄する
-        session_destroy();
-        $message = 'メールをお送りしました。';
-    } else {
-        $errors['mail_error'] = 'メールの送信に失敗しました。';
+        // } else {
+        //     $errors['mail_error'] = 'メールの送信に失敗しました。';
+        // }  
+    } catch (Exception $e) {
+        echo ('Error:'.$e->getMessage());
     }
 }
 ?>
