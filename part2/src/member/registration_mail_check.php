@@ -73,7 +73,6 @@ EOM;
 	$header = 'From: ' . mb_encode_mimeheader($name). ' <' . $mail. '>';
 
     try {
-
         //if (mb_send_mail($mailTo, $subject, $body, $header, '-f'. $returnMail)) {
             //セッション変数を全て解除
             $_SESSION = array();
