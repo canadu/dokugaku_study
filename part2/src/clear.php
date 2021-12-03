@@ -1,3 +1,3 @@
 <?php
- $_POST = array();
- header("Location:index.php");
+$_POST = array();
+header("Location:index.php");
