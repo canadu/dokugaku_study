@@ -3,7 +3,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 function dbConnect()
 {
-
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
     $dotenv->load();
 
@@ -24,7 +23,7 @@ function dbConnect()
 
 function dropTable($link)
 {
-    $dropTableSql = 'DROP TABLE IF EXISTS pre_member';
+    $dropTableSql = 'DROP TABLE IF EXISTS users';
     $result = mysqli_query($link, $dropTableSql);
     if ($result) {
         echo 'テーブルを削除しました。' . PHP_EOL;
@@ -37,15 +36,12 @@ function dropTable($link)
 function createTable($link)
 {
     $createTableSql = <<< EOT
-
-    CREATE TABLE pre_member (
-        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        urlToken VARCHAR(128) NOT NULL,
-        mail VARCHAR(50) NOT NULL,
-        date DATETIME NOT NULL,
-        flag TINYINT(1) NOT NULL DEFAULT 0,
+    CREATE TABLE users (
+        id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        email VARCHAR(255),
+        password VARCHAR(255),
         create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-        )ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+    ) DEFAULT CHARACTER SET=utf8mb4;
 EOT;
 
     $result = mysqli_query($link, $createTableSql);
