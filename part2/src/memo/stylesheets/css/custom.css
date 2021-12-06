@@ -1,0 +1,8 @@
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+}
+.footer-container i {
+  font-size: 1.2em;
+  color: #6c757d;
+}
