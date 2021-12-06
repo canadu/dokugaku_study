@@ -12,28 +12,15 @@
 
     <title><?php echo $title; ?></title>
 </head>
-
 <body>
-
     <nav class="navbar shadow-sm p-3 mb-5 bg-white">
-
         <a class="navbar-brand" href="#">
             <img src="" alt="" width="30" height="30" class="d-inline-block align-top">memo
         </a>
-
         <form class="form-inline">
             <input class="form-control mr-md-2" type="search"　placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-primary my-2 my-md-0" type="submit">検索</button>
         </form>
-        <!-- <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        </ul> -->
-
-
-        <!-- <h1 class="h2">
-            <a class="text-body text-decoration-none" href="index.php">テスト</a>
-        </h1> -->
     </nav>
     <div class=" container">
         <?php include $content; ?>
