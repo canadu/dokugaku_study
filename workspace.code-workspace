@@ -4,7 +4,8 @@
 			"path": "."
 		},
 		{
-			"path": "../../Back_CodeMafia"
+			"path": "../../../Sites/back_codemafia"
 		}
-	]
+	],
+	"settings": {}
 }
