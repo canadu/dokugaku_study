@@ -11,22 +11,25 @@
     <title><?php echo $title; ?></title>
 </head>
 <body>
-    <nav class="navbar navbar-expand navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" href="#">memo</a> 
-        <!-- ハンバーガーメニュー     -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar"
-            aria-controls="myNavbar" aria-expanded="false" aria-label="ハンバーガーメニュー">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="myNavbar">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item"><a class="nav-link" href="new_user"><i class="fas fa-user"></i> Sign Up</a></li>
-                <li class="nav-item"><a class="nav-link" href="login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-            </ul>
-        </div>
-    </nav>
+    <!-- ヘッダーを固定する -->
+    <header class="sticky-bottom">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+            <a class="navbar-brand" href="index.php">memo</a> 
+            <!-- ハンバーガーメニュー -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar"
+                aria-controls="myNavbar" aria-expanded="false" aria-label="ハンバーガーメニュー">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="myNavbar">
+                <ul class="navbar-nav mt-2">
+                    <li class="nav-item"><a class="nav-link" href="new_user"><i class="fas fa-user"></i> Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
     <!-- ここまで！！ -->
-    <div class=" container">
+    <div class="container">
         <?php include $content; ?>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

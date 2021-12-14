@@ -6,7 +6,7 @@ require_once __DIR__ . '/lib/DataSource.php';
 function getMemoData() {
     try {
         $db = new DataSource();
-        $results = $db->select('SELECT * FROM memos');
+        $results = $db->select('SELECT * FROM memos ORDER BY create_at DESC');
     } catch(PDOException $e) {
         echo 'エラーが発生しました。<br>';
         die();
