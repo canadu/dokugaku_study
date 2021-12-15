@@ -41,7 +41,7 @@ function createTable($link)
         id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
         title VARCHAR(255),
         detail VARCHAR(1000),
-        userid INTEGER, 
+        userId INTEGER, 
         create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     ) DEFAULT CHARACTER SET=utf8mb4;
 EOT;

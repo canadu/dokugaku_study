@@ -26,7 +26,7 @@ CREATE TABLE `comments` (
   `del_flg` int(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ(1:削除、0:有効)',
   `updated_by` varchar(20) NOT NULL DEFAULT 'pollapp' COMMENT '最終更新者',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最終更新日時'
-);
+) DEFAULT CHARSET=utf8mb4;
 
 --
 -- Table structure for table `topics`
@@ -43,7 +43,7 @@ CREATE TABLE `topics` (
   `del_flg` int(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ(1:削除、0:有効)',
   `updated_by` varchar(20) NOT NULL DEFAULT 'pollapp' COMMENT '最終更新者',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最終更新日時'
-);
+) DEFAULT CHARSET=utf8mb4;
 
 --
 -- Table structure for table `users`
@@ -56,7 +56,7 @@ CREATE TABLE `users` (
   `del_flg` int(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ(1:削除、0:有効)',
   `updated_by` varchar(20) NOT NULL DEFAULT 'pollapp' COMMENT '最終更新者',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最終更新日時'
-);
+) DEFAULT CHARSET=utf8mb4;
 
 START TRANSACTION;
 
@@ -98,7 +98,6 @@ INSERT INTO `topics` (`id`, `title`, `published`, `views`, `likes`, `dislikes`, 
 
 INSERT INTO `users` (`id`, `pwd`, `nickname`, `del_flg`) VALUES
 ('test', '$2y$10$n.PPvod4ai0r0qpqn5DurenOoxTyRhvef3S7DxoMu5BLRspG5oiBK', 'テストユーザー', 0);
-
 
 COMMIT;
 
