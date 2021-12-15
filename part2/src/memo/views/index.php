@@ -24,6 +24,6 @@
         <?php endif; ?>
     </div>
     <form action="new.php" method="POST">
-        <button type="submit" class="btn btn-outline-secondary new-btn"><i class="fas fa-edit mr-1"></i>新規作成</button>
+        <button type="submit" class="btn btn-secondary new-btn"><i class="fas fa-edit mr-1"></i>新規作成</button>
     </form>
 </main>
