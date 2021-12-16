@@ -9,6 +9,8 @@ services:
       - "50080:80"
     volumes:
       - ./src:/var/www/html
+      # ファイルを用意する必要がある
+      # './000-default.conf:/etc/apache2/sites-available/000-default.conf'
     depends_on:
       - db
 

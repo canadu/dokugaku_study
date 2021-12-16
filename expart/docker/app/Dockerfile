@@ -1,4 +1,7 @@
 FROM php:8-apache
+# viをインストール
+RUN apt-get update && apt-get -y install vim \
+    && a2enmod rewrite
 
 WORKDIR /var/www/html
 
