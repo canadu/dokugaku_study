@@ -1,13 +1,14 @@
 RewriteEngine On
 
+# 行頭が/pollでない場合
 RewriteCond %{REQUEST_URI} !^/poll
 RewriteRule .? /poll/index.php [R,L]
 
-# RewriteBase /
+# 行末が/poll/で終了している場合
+# RewriteCond %{REQUEST_URI} /poll/$
+# RewriteRule .? /poll/index.php [R,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /poll/$1/index.php
-
-# RewriteCond %{REQUEST_FILENAME} !-f
-# RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteRule ^.*$ http://localhost:50080/poll/index.php [R=301,L]
+RewriteRule .* /poll/$1/index.php
+# RewriteRule (part.+(end|start)) /poll/$1/index.php
