@@ -2,7 +2,7 @@ RewriteEngine On
 
 # 行頭が/pollでない場合
 RewriteCond %{REQUEST_URI} !^/poll
-RewriteRule .? /poll/index.php [R,L]
+RewriteRule .? /poll/ [R,L]
 
 # 行末が/poll/で終了している場合
 # RewriteCond %{REQUEST_URI} /poll/$

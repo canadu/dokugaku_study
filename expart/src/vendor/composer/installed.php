@@ -38,6 +38,15 @@
       ),
       'reference' => 'd56bf6102915de5702778fe20f2de3b2fe570b5b',
     ),
+    'graham-campbell/result-type' => 
+    array (
+      'pretty_version' => 'v1.0.4',
+      'version' => '1.0.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '0690bde05318336c7221785f2a932467f98b64ca',
+    ),
     'myclabs/deep-copy' => 
     array (
       'pretty_version' => '1.10.2',
@@ -122,6 +131,15 @@
       array (
       ),
       'reference' => '3637949092e6471aeaeca66bc6c016f45e459e24',
+    ),
+    'phpoption/phpoption' => 
+    array (
+      'pretty_version' => '1.8.1',
+      'version' => '1.8.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'eab7a0df01fe2344d172bff4cd6dbd3f8b84ad15',
     ),
     'phpspec/prophecy' => 
     array (
@@ -478,6 +496,15 @@
       array (
       ),
       'reference' => '34a41e998c2183e22995f158c581e7b5e755ab9e',
+    ),
+    'vlucas/phpdotenv' => 
+    array (
+      'pretty_version' => 'v5.4.1',
+      'version' => '5.4.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '264dce589e7ce37a7ba99cb901eed8249fbec92f',
     ),
     'webmozart/assert' => 
     array (
