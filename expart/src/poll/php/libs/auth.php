@@ -3,6 +3,7 @@
 namespace lib;
 
 use db\UserQuery;
+use model\UserModel;
 
 class Auth
 {
@@ -20,6 +21,20 @@ class Auth
             }
         } else {
             echo 'ユーザーが見つかりません。';
+        }
+        return $is_success;
+    }
+    public static function regist($user)
+    {
+        $is_success = false;
+        $exist_user = UserQuery::fetchById($user->id);
+        if (!empty($exist_user)) {
+            echo 'ユーザーが既に存在します。';
+            return false;
+        }
+        $is_success = UserQuery::insert($user);
+        if ($is_success) {
+            $_SESSION['user'] = $user;
         }
         return $is_success;
     }

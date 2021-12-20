@@ -61,7 +61,7 @@ class DataSource
      *  @param array<mixed> $params
      *  @param string $type
      *  @param string $cls
-     *  @return array<mixed>|bool
+
      */
     public function selectOne(string $sql = "", array $params = [], string $type = '', string $cls = '')
     {
@@ -73,9 +73,8 @@ class DataSource
     /**
      *  @param string $sql
      *  @param array<mixed> $params
-     *  @return bool $sqlResult
      */
-    public function execute(string $sql = "", array $params = []): bool
+    public function execute(string $sql = "", array $params = [])
     {
         $this->executeSql($sql, $params);
         return  $this->sqlResult;
