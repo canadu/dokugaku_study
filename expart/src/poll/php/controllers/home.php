@@ -2,7 +2,7 @@
 
 namespace controller\home;
 
-function get()
+function get(): void
 {
     require_once SOURCE_BASE . 'views/home.php';
 }
