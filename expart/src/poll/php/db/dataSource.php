@@ -4,16 +4,16 @@ namespace db;
 
 use Dotenv;
 use PDO;
+use PDOStatement;
+use phpDocumentor\Reflection\Types\Mixed_;
 
 //vendorディレクトリの階層を指定する
 require __DIR__ . '/../../../vendor/autoload.php';
 
 class DataSource
 {
-
-    private $conn;
-    private $sqlResult;
-
+    private PDO $conn;
+    private bool $sqlResult;
     private string $dbHost;
     private string $dbUsername;
     private string $dbPassword;
@@ -38,7 +38,14 @@ class DataSource
     }
 
     //取得下データを返す
-    public function select($sql = "", $params = [], $type = '', $cls = '')
+    /**
+     *  @param string $sql
+     *  @param array<mixed> $params
+     *  @param string $type
+     *  @param string $cls
+     *  @return array<mixed>
+     */
+    public function select(string $sql = "", array $params = [], string $type = '', string $cls = ''): array
     {
         $stmt = $this->executeSql($sql, $params);
         if ($type === static::CLS) {
@@ -49,20 +56,37 @@ class DataSource
     }
 
     //取得したデータから１行取得
-    public function selectOne($sql = "", $params = [], $type = '', $cls = '')
+    /**
+     *  @param string $sql
+     *  @param array<mixed> $params
+     *  @param string $type
+     *  @param string $cls
+     *  @return array<mixed>|bool
+     */
+    public function selectOne(string $sql = "", array $params = [], string $type = '', string $cls = '')
     {
         $result = $this->select($sql, $params, $type, $cls);
         return count($result) > 0 ? $result[0] : false;
     }
 
     //sql実行
-    public function execute($sql = "", $params = [])
+    /**
+     *  @param string $sql
+     *  @param array<mixed> $params
+     *  @return bool $sqlResult
+     */
+    public function execute(string $sql = "", array $params = []): bool
     {
         $this->executeSql($sql, $params);
         return  $this->sqlResult;
     }
 
-    private function executeSql($sql, $params)
+    /**
+     *  @param string $sql
+     *  @param array<mixed> $params
+     *  @return PDOStatement $stmt
+     */
+    private function executeSql(string $sql, array $params): PDOStatement
     {
         $stmt = $this->conn->prepare($sql);
         $this->sqlResult = $stmt->execute($params);
@@ -70,17 +94,17 @@ class DataSource
     }
 
     //トランザクション
-    public function begin()
+    public function begin(): void
     {
         $this->conn->beginTransaction();
     }
 
-    public function commit()
+    public function commit(): void
     {
         $this->conn->commit();
     }
 
-    public function rollback()
+    public function rollback(): void
     {
         $this->conn->rollback();
     }

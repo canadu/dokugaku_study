@@ -22,19 +22,25 @@ $rPath = str_replace(BASE_CONTEXT_PATH, '', $_SERVER['REQUEST_URI']);
 $method = strtolower($_SERVER['REQUEST_METHOD']);
 route($rPath, $method);
 
-function route($rPath, $method)
+/**
+ * 呼び出されたURIに応じてコントローラーのファイルを呼び出し、存在しない場合は
+ * 404.phpを呼び出す
+ * @rPath パス
+ * @methods メソッド
+ */
+function route(string $rPath, string $methods): void
 {
     if ($rPath == '') {
         $rPath = 'home';
     }
     $targetFile = SOURCE_BASE . "controllers/{$rPath}.php";
-
     if (!file_exists($targetFile)) {
+        //ファイルが存在しない場合404ファイルを読み込み
         require_once SOURCE_BASE . "/views/404.php";
         return;
     }
     require_once $targetFile;
-    $fn = "\\controller\\{$rPath}\\{$method}";
+    $fn = "\\controller\\{$rPath}\\{$methods}";
     $fn();
 }
 
