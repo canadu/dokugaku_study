@@ -3,7 +3,7 @@
 namespace lib;
 
 use db\UserQuery;
-use model\UserModel;
+// use model\UserModel;
 
 class Auth
 {
@@ -24,6 +24,7 @@ class Auth
         }
         return $is_success;
     }
+
     public static function regist($user)
     {
         $is_success = false;
