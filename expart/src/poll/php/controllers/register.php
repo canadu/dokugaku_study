@@ -19,6 +19,7 @@ function post(): void
     $user->id = get_param('id', '');
     $user->pwd = get_param('pwd', '');
     $user->nickname = get_param('nickname', '');
+
     if (Auth::regist($user)) {
         echo '登録成功';
     } else {

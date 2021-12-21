@@ -3,6 +3,7 @@
 namespace lib;
 
 use db\UserQuery;
+use model\UserModel;
 // use model\UserModel;
 
 class Auth
@@ -15,7 +16,7 @@ class Auth
             if (password_verify($pwd, $user->pwd)) {
                 $is_success = true;
                 //セッション変数にオブジェクトを格納する
-                $_SESSION['user'] = $user;
+                UserModel::setSession($user);
             } else {
                 echo 'パスワードが一致しません。';
             }
@@ -35,8 +36,18 @@ class Auth
         }
         $is_success = UserQuery::insert($user);
         if ($is_success) {
-            $_SESSION['user'] = $user;
+            UserModel::setSession($user);
         }
         return $is_success;
+    }
+
+    public static function isLogin()
+    {
+        $user = UserModel::getSession();
+        if (isset($user)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
