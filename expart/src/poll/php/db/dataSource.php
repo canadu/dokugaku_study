@@ -43,9 +43,8 @@ class DataSource
      *  @param array<mixed> $params
      *  @param string $type
      *  @param string $cls
-     *  @return array<mixed>
      */
-    public function select(string $sql = "", array $params = [], string $type = '', string $cls = ''): array
+    public function select(string $sql = "", array $params = [], string $type = '', string $cls = '')
     {
         $stmt = $this->executeSql($sql, $params);
         if ($type === static::CLS) {
@@ -83,9 +82,8 @@ class DataSource
     /**
      *  @param string $sql
      *  @param array<mixed> $params
-     *  @return PDOStatement $stmt
      */
-    private function executeSql(string $sql, array $params): PDOStatement
+    private function executeSql(string $sql, array $params)
     {
         $stmt = $this->conn->prepare($sql);
         $this->sqlResult = $stmt->execute($params);
