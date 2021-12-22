@@ -1,7 +1,6 @@
 <?php
 
 namespace model;
-
 use Error;
 
 //抽象クラス
@@ -19,7 +18,7 @@ abstract class AbstractModel
     }
 
     //セッション情報を取得する
-    public static function getSession()
+    public static function getSession() 
     {
         return $_SESSION[static::$SESSION_NAME] ?? null;
     }

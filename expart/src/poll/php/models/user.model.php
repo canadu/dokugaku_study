@@ -2,10 +2,8 @@
 
 namespace model;
 
-use phpDocumentor\Reflection\Types\AbstractList;
-
-class UserModel extends AbstractModel
-{
+//AbstractModelを継承
+class UserModel extends AbstractModel {
     public string $id;
     public string $pwd;
     public string $nickname;

@@ -14,7 +14,6 @@ require_once 'config.php';
 
 <body>
     <?php
-
     use lib\Auth;
 
     if (Auth::isLogin()) {
