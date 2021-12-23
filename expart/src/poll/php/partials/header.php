@@ -15,7 +15,7 @@ require_once 'config.php';
 <body>
     <?php
     use lib\Auth;
-
+    echo $_SERVER['HTTP_HOST'];
     if (Auth::isLogin()) {
         echo 'ログイン中です.';
     } else {
