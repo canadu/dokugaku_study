@@ -14,10 +14,13 @@ require_once 'config.php';
 
 <body>
     <?php
+
     use lib\Auth;
-    echo $_SERVER['HTTP_HOST'];
+    use lib\Msg;
+
+    Msg::flush();
     if (Auth::isLogin()) {
-        echo 'ログイン中です.';
+        echo 'ログインしています';
     } else {
         echo 'ログインしていません。';
     }

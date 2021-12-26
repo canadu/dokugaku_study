@@ -7,13 +7,13 @@ use model\UserModel;
 // use model\UserModel;
 class Auth
 {
-    public static function login(string $id, string $pwd)
+    public static function login($id, $pwd)
     {
         $is_success = false;
         $user = UserQuery::fetchById($id);
 
         if (!empty($user) && $user->del_flg !== 1) {
-        
+
             if (password_verify($pwd, $user->pwd)) {
                 $is_success = true;
                 //セッション変数にオブジェクトを格納する
