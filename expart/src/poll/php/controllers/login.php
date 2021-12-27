@@ -20,9 +20,9 @@ function post(): void
 
     if (Auth::login($id, $pwd)) {
         Msg::push(Msg::INFO, '認証成功');
-        //redirect(GO_HOME);
+        redirect(GO_HOME);
     } else {
         Msg::push(Msg::ERROR, '認証失敗');
-        //redirect(GO_REFERER);
+        redirect(GO_REFERER);
     }
 }

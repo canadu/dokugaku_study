@@ -2,7 +2,7 @@
 
 namespace controller\login;
 ?>
-<h1>Loginページです</h1>
+<h3>Loginページです</h3>
 <!-- 自分自身のページにPOSTする -->
 <form action="<?php echo CURRENT_URI; ?>" method="POST">
     <div>

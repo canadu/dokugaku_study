@@ -2,7 +2,7 @@
 
 namespace controller\register;
 ?>
-<h1>Registerページです</h1>
+<h3>Registerページです</h3>
 <!-- 自分自身のページにPOSTする -->
 <form action="<?php echo CURRENT_URI; ?>" method="POST">
     <div>
