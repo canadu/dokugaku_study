@@ -14,10 +14,8 @@ require_once 'config.php';
 
 <body>
     <?php
-
-    use lib\Auth;
+    use lib\auth;
     use lib\Msg;
-
     Msg::flush();
     if (Auth::isLogin()) {
         echo 'ログインしています';

@@ -22,7 +22,6 @@ require_once SOURCE_BASE . 'db/user.query.php';
 
 require_once SOURCE_BASE . 'partials/header.php';
 
-
 $rPath = str_replace(BASE_CONTEXT_PATH, '', $_SERVER['REQUEST_URI']);
 $method = strtolower($_SERVER['REQUEST_METHOD']);
 route($rPath, $method);

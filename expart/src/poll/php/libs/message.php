@@ -6,11 +6,9 @@ use model\AbstractModel;
 
 use function PHPUnit\Framework\isNull;
 
-class Msg extends AbstractModel
-{
+class Msg extends AbstractModel {
 
     protected static $SESSION_NAME = '_msg';
-
     public const ERROR = 'error';
     public const INFO = 'info';
     public const DEBUG = 'debug';
@@ -21,20 +19,20 @@ class Msg extends AbstractModel
      */
     public static function push($type, $msg)
     {
-        if (!is_array(static::getSession())) {
-            static::init();
+        if (!is_array(Msg::getSession())) {
+            Msg::init();
         }
-        $msgs = static::getSession();
+        $msgs = Msg::getSession();
         $msgs[$type][] = $msg;
         static::setSession($msgs);
     }
 
     /**
-     *　メッセージを表示するメソッド
+     *メッセージを表示するメソッド
      */
     public static function flush()
     {
-        $msg_with_type = static::getSessionAndFlush() ?? [];
+        $msg_with_type = Msg::getSessionAndFlush() ?? [];
         foreach ($msg_with_type as $type => $msgs) {
             foreach ($msgs as $msg) {
                 echo "<div>{$msg}</div>";
