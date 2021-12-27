@@ -3,10 +3,12 @@
 namespace lib;
 
 use model\AbstractModel;
+use Throwable;
 
 use function PHPUnit\Framework\isNull;
 
-class Msg extends AbstractModel {
+class Msg extends AbstractModel
+{
 
     protected static $SESSION_NAME = '_msg';
     public const ERROR = 'error';
@@ -32,11 +34,20 @@ class Msg extends AbstractModel {
      */
     public static function flush()
     {
-        $msg_with_type = Msg::getSessionAndFlush() ?? [];
-        foreach ($msg_with_type as $type => $msgs) {
-            foreach ($msgs as $msg) {
-                echo "<div>{$msg}</div>";
+        try {
+            $msg_with_type = Msg::getSessionAndFlush() ?? [];
+            foreach ($msg_with_type as $type => $msgs) {
+                if ($type === static::DEBUG && !DEBUG) {
+                    continue;
+                }
+                foreach ($msgs as $msg) {
+                    echo "<div>{$type}:{$msg}</div>";
+                }
             }
+        } catch (throwable $e) {
+            $is_success = false;
+            Msg::push(Msg::DEBUG, $e->getMessage());
+            Msg::push(Msg::ERROR, 'Msg::Flushで例外が発生しました。');
         }
     }
 
