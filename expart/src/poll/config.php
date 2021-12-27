@@ -13,3 +13,6 @@ define('SOURCE_BASE', __DIR__ . '/php/');
 
 define('GO_HOME', 'home');
 define('GO_REFERER', 'referer');
+
+//デバッグフラグ。開発の場合はtrueに設定し、falseの場合は本番環境とする
+define('DEBUG', false);
