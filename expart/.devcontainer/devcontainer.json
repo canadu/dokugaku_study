@@ -6,7 +6,7 @@
   "service": "app",
   "workspaceFolder": "/var/www/html",
   "forwardPorts": [
-    9004
+    9003
   ],
   "extensions": [
     "felixfbecker.php-debug",
