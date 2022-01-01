@@ -4,6 +4,7 @@ namespace controller\login;
 
 use lib\Auth;
 use lib\Msg;
+use model\UserModel;
 
 function get(): void
 {
@@ -18,12 +19,11 @@ function post(): void
     $id = get_param('id', '');
     $pwd = get_param('pwd', '');
 
-    Msg::push(Msg::DEBUG, 'デバッグメッセージです');
     if (Auth::login($id, $pwd)) {
-        Msg::push(Msg::INFO, '認証成功');
+        $user = unserialize(UserModel::getSession());
+        Msg::push(Msg::INFO, "{$user->nickname}さん、ようこそ。");
         redirect(GO_HOME);
     } else {
-        Msg::push(Msg::ERROR, '認証失敗');
         redirect(GO_REFERER);
     }
 }
