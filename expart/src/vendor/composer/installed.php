@@ -247,6 +247,15 @@
       ),
       'reference' => NULL,
     ),
+    'scssphp/scssphp' => 
+    array (
+      'pretty_version' => 'v1.9.0',
+      'version' => '1.9.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'bc8bece4e5e176973a832f3763049ddbba16e6fd',
+    ),
     'sebastian/cli-parser' => 
     array (
       'pretty_version' => '1.0.1',
@@ -496,6 +505,22 @@
       array (
       ),
       'reference' => '34a41e998c2183e22995f158c581e7b5e755ab9e',
+    ),
+    'twbs/bootstrap' => 
+    array (
+      'pretty_version' => 'v4.5.0',
+      'version' => '4.5.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7a6da5e3e7ad7c749dde806546a35d4d4259d965',
+    ),
+    'twitter/bootstrap' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v4.5.0',
+      ),
     ),
     'vlucas/phpdotenv' => 
     array (

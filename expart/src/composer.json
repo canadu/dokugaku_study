@@ -12,6 +12,8 @@
         "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon"
     },
     "require": {
-        "vlucas/phpdotenv": "^5.4"
+        "vlucas/phpdotenv": "^5.4",
+        "scssphp/scssphp": "^1.9",
+        "twbs/bootstrap": "4.5.0"
     }
 }

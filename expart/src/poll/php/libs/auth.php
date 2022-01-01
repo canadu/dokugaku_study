@@ -11,6 +11,14 @@ class Auth
     public static function login($id, $pwd)
     {
         try {
+
+            if (
+                !(UserModel::validateId($id)
+                    * UserModel::validatePwd($id))
+            ) {
+                return false;
+            }
+
             $is_success = false;
             $user = UserQuery::fetchById($id);
 
@@ -21,10 +29,10 @@ class Auth
                     //セッション変数にオブジェクトを格納する
                     UserModel::setSession(serialize($user));
                 } else {
-                    echo 'パスワードが一致しません。';
+                    Msg::push(Msg::ERROR, 'パスワードが一致しません。');
                 }
             } else {
-                echo 'ユーザーが見つかりません。';
+                Msg::push(Msg::ERROR, 'ユーザーが見つかりません。');
             }
         } catch (throwable $e) {
             $is_success = false;
@@ -38,7 +46,11 @@ class Auth
     {
         try {
             //入力チェック
-            if (!$user->isValidId()) {
+            if (
+                !($user->isValidId()
+                    * $user->isValidPwd()
+                    * $user->isValidNickname())
+            ) {
                 return false;
             }
             $is_success = false;
@@ -69,10 +81,24 @@ class Auth
             Msg::push(Msg::ERROR, 'エラーが発生しました。再度ログインを行ってください。');
             return false;
         }
-        if (isset($user)) {
-            return true;
+        if (!isset($user) || $user === false) {
+            return false;
         } else {
+            return true;
+        }
+    }
+    /**
+     * ログアウト
+     */
+    public static function logout()
+    {
+        try {
+            UserModel::clearSession();
+        } catch (throwable $e) {
+            //エラーが起きた場合ユーザーをログアウトさせる
+            Msg::push(Msg::DEBUG, $e->getMessage());
             return false;
         }
+        return true;
     }
 }
