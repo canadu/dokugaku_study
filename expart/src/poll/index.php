@@ -24,7 +24,11 @@ require_once SOURCE_BASE . 'libs/message.php';
 require_once SOURCE_BASE . 'db/dataSource.php';
 require_once SOURCE_BASE . 'db/user.query.php';
 
+//partials
 require_once SOURCE_BASE . 'partials/header.php';
+
+//view
+require_once SOURCE_BASE . 'views/login.php';
 
 use function lib\route;
 
