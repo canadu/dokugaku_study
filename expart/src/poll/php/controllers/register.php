@@ -8,7 +8,8 @@ use model\UserModel;
 
 function get(): void
 {
-    require_once SOURCE_BASE . 'views/register.php';
+    //require_once SOURCE_BASE . 'views/register.php';
+    \view\register\register();
 }
 
 function post(): void

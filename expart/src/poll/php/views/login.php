@@ -1,8 +1,9 @@
 <?php
 
-//namespace controller\login;
-
+namespace view\login;
+// namespace controller\login;
 ?>
+
 <!-- <h3>Loginページです</h3> -->
 <!-- 自分自身のページにPOSTする -->
 <!-- <form action="<?php echo CURRENT_URI; ?>" method="POST">
@@ -16,10 +17,8 @@
         <input type="submit" value="ログイン">
     </div>
 </form> -->
+
 <?php
-
-// namespace 
-
 function index()
 {
 ?>
@@ -30,7 +29,6 @@ function index()
             <img width="65" src="images/logo.svg" alt="みんなのアンケート サイトロゴ">
         </div>
         <div class="login-form bg-white p-4 shadow-sm mx-auto rounded">
-
             <form action="<?php echo CURRENT_URI; ?>" method="POST">
                 <div class="form-group">
                     <label for="">ユーザーID</label>

@@ -8,8 +8,7 @@ use model\UserModel;
 
 function get(): void
 {
-
-    // \view\login\index();
+    \view\login\index();
 }
 
 function post(): void
