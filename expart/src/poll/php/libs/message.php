@@ -36,14 +36,21 @@ class Msg extends AbstractModel
     {
         try {
             $msg_with_type = Msg::getSessionAndFlush() ?? [];
+
+            echo '<div id="messages">';
+
             foreach ($msg_with_type as $type => $msgs) {
                 if ($type === static::DEBUG && !DEBUG) {
                     continue;
                 }
+                $color = $type === static::INFO ? 'alert-info' : 'alert-danger';
                 foreach ($msgs as $msg) {
-                    echo "<div>{$type}:{$msg}</div>";
+                    //echo "<div>{$type}:{$msg}</div>";
+                    echo "<div class='alert $color'>{$msg}</div>";
                 }
             }
+
+            echo '</div>';
         } catch (throwable $e) {
             $is_success = false;
             Msg::push(Msg::DEBUG, $e->getMessage());

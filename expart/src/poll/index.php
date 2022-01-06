@@ -16,6 +16,7 @@ require_once SOURCE_BASE . 'libs/router.php';
 //model
 require_once SOURCE_BASE . 'models/abstract.model.php';
 require_once SOURCE_BASE . 'models/user.model.php';
+require_once SOURCE_BASE . 'models/topic.model.php';
 
 //Message
 require_once SOURCE_BASE . 'libs/message.php';
@@ -23,9 +24,11 @@ require_once SOURCE_BASE . 'libs/message.php';
 //db
 require_once SOURCE_BASE . 'db/dataSource.php';
 require_once SOURCE_BASE . 'db/user.query.php';
+require_once SOURCE_BASE . 'db/topic.query.php';
 
 //partials
 require_once SOURCE_BASE . 'partials/header.php';
+require_once SOURCE_BASE . 'partials/footer.php';
 
 //view
 require_once SOURCE_BASE . 'views/login.php';
@@ -34,10 +37,11 @@ require_once SOURCE_BASE . 'views/register.php';
 use function lib\route;
 
 try {
+    \partials\header();
     $rPath = str_replace(BASE_CONTEXT_PATH, '', $_SERVER['REQUEST_URI']);
     $method = strtolower($_SERVER['REQUEST_METHOD']);
     route($rPath, $method);
-    require_once SOURCE_BASE . 'partials/footer.php';
+    \partials\footer();
 } catch (throwable $e) {
     die('<h1>なにか凄くおかしいようです。</h1>');
 }
