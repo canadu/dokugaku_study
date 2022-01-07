@@ -19,7 +19,6 @@ function route(string $rPath, string $methods): void
             require_once SOURCE_BASE . "/views/404.php";
             return;
         }
-
         require_once $targetFile;
         $rPath = str_replace('/', '\\', $rPath);
         $fn = "\\controller\\{$rPath}\\{$methods}";

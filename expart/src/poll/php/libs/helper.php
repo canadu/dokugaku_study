@@ -50,3 +50,19 @@ function the_url($path)
 {
     echo get_url($path);
 }
+
+function escape($data) {
+    if(is_array($data)) {
+        foreach($data as $prop => $val) {
+            $data[$prop] = escape($val);
+        }
+        return $data;
+    } elseif (is_object($data)) {
+        foreach($data as $prop => $val) {
+            $data->$prop = escape($val);
+        }
+        return $data;
+    } else {
+        return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+    }
+}
