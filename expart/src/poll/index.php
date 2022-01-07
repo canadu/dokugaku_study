@@ -29,17 +29,22 @@ require_once SOURCE_BASE . 'db/topic.query.php';
 //partials
 require_once SOURCE_BASE . 'partials/header.php';
 require_once SOURCE_BASE . 'partials/footer.php';
+require_once SOURCE_BASE . 'partials/topic_list_item.php';
 
 //view
 require_once SOURCE_BASE . 'views/login.php';
 require_once SOURCE_BASE . 'views/register.php';
+require_once SOURCE_BASE . 'views/topic/archive.php';
 
 use function lib\route;
 
 try {
+    // headerを関数としてcall
     \partials\header();
-    $rPath = str_replace(BASE_CONTEXT_PATH, '', $_SERVER['REQUEST_URI']);
+    $url = parse_url(CURRENT_URI);
+    $rPath = str_replace(BASE_CONTEXT_PATH, '', $url['path']);
     $method = strtolower($_SERVER['REQUEST_METHOD']);
+
     route($rPath, $method);
     \partials\footer();
 } catch (throwable $e) {

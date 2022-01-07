@@ -12,7 +12,6 @@ class TopicQuery
         if (!$user->isValidId()) {
             return false;
         }
-
         $db = new DataSource();
         $result = $db->select(
             'select * from topics where user_id = :id and del_flg != 1;',
