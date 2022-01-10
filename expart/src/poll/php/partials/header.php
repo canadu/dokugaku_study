@@ -17,8 +17,9 @@ function header()
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="//fonts.googleapis.com/css2?family=M+PLUS+Rounded+1ccdgit :wght@500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo BASE_CSS_PATH ?>app.css">
+        <link href="//fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="<?php echo BASE_CSS_PATH; ?>app.css"> -->
+        <link rel="stylesheet" href="<?php echo (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . BASE_CONTEXT_PATH . BASE_CSS_PATH; ?>app.css">
         <title>みんなのアンケート</title>
     </head>
 

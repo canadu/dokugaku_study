@@ -30,6 +30,7 @@ require_once SOURCE_BASE . 'db/topic.query.php';
 require_once SOURCE_BASE . 'partials/header.php';
 require_once SOURCE_BASE . 'partials/footer.php';
 require_once SOURCE_BASE . 'partials/topic_list_item.php';
+require_once SOURCE_BASE . 'partials/topic_header_item.php';
 
 //view
 require_once SOURCE_BASE . 'views/login.php';
