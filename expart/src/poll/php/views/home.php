@@ -1,8 +1,18 @@
 <?php
 
-namespace controller\home;
+namespace view\home;
+
+function index($topics)
+{
+    $topic = array_shift($topics);
+    \partials\topic_header_item($topic);
 ?>
-<h3>TOPページです</h3>
-<form action="<?php echo BASE_CONTEXT_PATH; ?>login" method="POST">
-    <input type="submit" value="送信">
-</form>
+    <ul class="container">
+        <?php
+        foreach ($topics as $topic) {
+            $url = get_url('topic/edit?topic_id=' . $topic->id);
+            \partials\topic_list_item($topic, $url, true);
+        }
+        ?>
+    </ul>
+<?php } ?>
