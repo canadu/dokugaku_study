@@ -14,6 +14,7 @@ class TopicModel extends AbstractModel
     public int $likes;
     public int $dislikes;
     public string $user_id;
+    public string $nickname;
     public int $del_flg;
 
     //なにか特定のメソッドを通じて値を取得するようなものにアンダースコアをつける！
