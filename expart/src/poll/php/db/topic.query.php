@@ -22,11 +22,22 @@ class TopicQuery
         return $result;
     }
 
+    public static function fetchById($topic)
+    {
+        if ($topic->isValidId()) {
+            return false;
+        }
+        $db = new DataSource();
+        $sql = 'SELECT t.*, u.nickname FROM topics t INNER JOIN users u ON t.user_id = u.id WHERE t.id = :id AND t.del_flg != 1 AND u.del_flg !=1 ORDER BY t.id DESC';
+        $result = $db->select($sql, [':id' => $topic->id], DataSource::CLS, TopicModel::class);
+        return $result;
+    }
+
     public static function fetchPublishedTopics()
     {
         $db = new DataSource();
         $sql = 'SELECT t.*, u.nickname FROM topics t INNER JOIN users u ON t.user_id = u.id WHERE t.del_flg != 1 AND u.del_flg !=1 ORDER BY t.id DESC';
-        $result = $db->select($sql, [], DataSource::CLS, TopicModel::class);
+        $result = $db->selectOne($sql, [], DataSource::CLS, TopicModel::class);
         return $result;
     }
 }
