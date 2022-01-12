@@ -5,25 +5,22 @@ namespace model;
 use lib\Msg;
 
 //AbstractModelを継承
-class TopicModel extends AbstractModel
+class CommentModel extends AbstractModel
 {
     public int $id;
-    public string $title;
-    public int $published;
-    public int $views;
-    public int $likes;
-    public int $dislikes;
+    public int $topic_id;
+    public int $agree;
+    public string $body;
     public string $user_id;
-    public string $nickname;
     public int $del_flg;
-
+    public string $nickname;
     //なにか特定のメソッドを通じて値を取得するようなものにアンダースコアをつける！
-    protected static $SESSION_NAME = '_topic';
+    protected static $SESSION_NAME = '_comment';
 
-    public function isValidId()
-    {
-        return true;
-    }
+    // public function isValidId()
+    // {
+    //     return static::validateId($this->id);
+    // }
 
     // public static function validateId($val)
     // {
