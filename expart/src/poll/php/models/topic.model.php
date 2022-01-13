@@ -2,7 +2,7 @@
 
 namespace model;
 
-use lib\Msg;
+//use lib\Msg;
 
 //AbstractModelを継承
 class TopicModel extends AbstractModel

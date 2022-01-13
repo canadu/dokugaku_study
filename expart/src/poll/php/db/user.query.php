@@ -11,7 +11,7 @@ class UserQuery
     {
         $db = new DataSource();
         $result = $db->selectOne(
-            'select * from users where id = :id',
+            'SELECT * FROM users WHERE id = :id',
             [':id' => $id],
             DataSource::CLS,
             UserModel::class
@@ -22,7 +22,7 @@ class UserQuery
     public static function insert($user)
     {
         $db = new DataSource;
-        $sql = 'insert into users(id,pwd,nickname) values (:id, :pwd, :nickname)';
+        $sql = 'INSERT INTO users(id,pwd,nickname) VALUES (:id, :pwd, :nickname)';
         //ソルトもpassword_hash関数が自動的に生成される
         $pwd = password_hash($user->pwd, PASSWORD_DEFAULT);
         return $db->execute($sql, [

@@ -19,6 +19,5 @@ function get()
         Msg::push(Msg::ERROR, 'トピックが見つかりません。');
         redirect('404');
     }
-
     \view\topic\detail\index($fetchedTopic, $comments);
 }
