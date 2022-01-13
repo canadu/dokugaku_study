@@ -6,7 +6,6 @@ function index($topic, $comments)
 {
     \partials\topic_header_item($topic, false);
 ?>
-
     <ul class="list-unstyled my-5">
         <?php foreach ($comments as $comment) : ?>
             <?php
@@ -19,7 +18,6 @@ function index($topic, $comments)
                     <span><?php echo $comment->body; ?></span>
                 </h2>
                 <span>Coomented by <?php echo $comment->nickname; ?></span>
-
                 <div class="col-auto mx-auto">
                 </div>
             </li>

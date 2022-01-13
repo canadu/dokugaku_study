@@ -10,7 +10,7 @@ class CommentQuery
 
     public static function fetchByTopicId($topic)
     {
-        if ($topic->isValidId()) {
+        if (!$topic->isValidId()) {
             return false;
         }
         $db = new DataSource();

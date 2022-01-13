@@ -2,7 +2,7 @@
 
 //オブジェクトをセッションに格納した場合にはsession_startの前に雛形のクラス(user.model.php)を読みこ無必要がある。
 
-use lib\Msg;
+//use lib\Msg;
 
 session_start();
 
@@ -49,7 +49,7 @@ try {
     $url = parse_url(CURRENT_URI);
     $rPath = str_replace(BASE_CONTEXT_PATH, '', $url['path']);
     $method = strtolower($_SERVER['REQUEST_METHOD']);
-
+    //対応したcontrollersのファイルを呼び出す
     route($rPath, $method);
     \partials\footer();
 } catch (throwable $e) {
