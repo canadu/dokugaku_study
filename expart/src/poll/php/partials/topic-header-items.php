@@ -3,7 +3,6 @@
 namespace partials;
 
 use lib\Auth;
-use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 
 function topic_header_item($topic, $from_top_page)
 {

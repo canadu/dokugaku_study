@@ -9,7 +9,9 @@ abstract class AbstractModel
 {
     protected static $SESSION_NAME = null;
 
-    //セッション情報を設定する
+    /**
+     *セッション情報を設定する 
+     */
     public static function setSession($val)
     {
         if (empty(static::$SESSION_NAME)) {
@@ -18,18 +20,25 @@ abstract class AbstractModel
         $_SESSION[static::$SESSION_NAME] = $val;
     }
 
-    //セッション情報を取得する
+    /**
+     *セッション情報を取得する 
+     */
     public static function getSession()
     {
         return $_SESSION[static::$SESSION_NAME] ?? null;
     }
 
-    //セッション情報をクリアする
+    /**
+     *セッション情報をクリアする 
+     */
     public static function clearSession()
     {
         static::setSession(null);
     }
 
+    /**
+     * 
+     */
     public static function getSessionAndFlush()
     {
         try {

@@ -7,7 +7,6 @@ use model\CommentModel;
 
 class CommentQuery
 {
-
     public static function fetchByTopicId($topic)
     {
         if (!$topic->isValidId()) {
