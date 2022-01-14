@@ -7,6 +7,7 @@ use model\UserModel;
 
 class UserQuery
 {
+    //ユーザー情報を取得
     public static function fetchById(string $id)
     {
         $db = new DataSource();
@@ -19,6 +20,7 @@ class UserQuery
         return $result;
     }
 
+    //ユーザー情報を登録
     public static function insert($user)
     {
         $db = new DataSource;

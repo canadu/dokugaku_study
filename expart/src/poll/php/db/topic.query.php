@@ -6,6 +6,7 @@ use db\DataSource;
 use model\TopicModel;
 use model\UserModel;
 
+
 class TopicQuery
 {
     public static function fetchByUserID($user)
@@ -84,7 +85,7 @@ class TopicQuery
                     topics t 
                 WHERE t.id = :topic_id 
                     AND t.user_id = :user_id
-                    AND u.del_flg !=1';
+                    AND t.del_flg !=1';
         $result = $db->selectOne($sql, [':topic_id' => $topic_id, ':user_id' => $user->id]);
         if (!empty($result) && $result['count'] != 0) {
             return true;

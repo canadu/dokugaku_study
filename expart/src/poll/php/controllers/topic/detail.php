@@ -9,13 +9,16 @@ use model\TopicModel;
 
 function get()
 {
-
     $topic = new TopicModel;
     $topic->id = get_param('topic_id', null, false);
 
+    //viewのインクリメント
     TopicQuery::incrementViewCount($topic);
-
+    
+    //ユーザーに紐づくトピックを取得する
     $fetchedTopic = TopicQuery::fetchByID($topic);
+
+    //ユーザーが投稿したトピックのコメントを取得
     $comments = CommentQuery::fetchByTopicId($topic);
 
     if ($fetchedTopic === false) {

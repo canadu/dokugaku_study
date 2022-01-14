@@ -15,11 +15,13 @@ class UserModel extends AbstractModel
     //なにか特定のメソッドを通じて値を取得するようなものにアンダースコアをつける！
     protected static $SESSION_NAME = '_user';
 
+    /** 
+     * ユーザーIDの入力チェック
+    */
     public function isValidId()
     {
         return static::validateId($this->id);
     }
-
     public static function validateId($val)
     {
         $res = true;
@@ -39,6 +41,13 @@ class UserModel extends AbstractModel
         return $res;
     }
 
+    /** 
+     * ユーザーパスワードの入力チェック
+    */
+    public function isValidPwd()
+    {
+        return static::validatePwd($this->pwd);
+    }
     public static function validatePwd($val)
     {
         $res = true;
@@ -65,16 +74,16 @@ class UserModel extends AbstractModel
         return $res;
     }
 
-    public function isValidPwd()
+    /**
+     * ニックネームの入力チェック
+     */
+    public function isValidNickname()
     {
-        return static::validatePwd($this->pwd);
+        return static::validateNickname($this->nickname);
     }
-
-
     public static function validateNickname($val)
     {
         $res = true;
-
         if (empty($val)) {
             Msg::push(Msg::ERROR, 'ニックネームを入力してください。');
             $res = false;
@@ -86,10 +95,5 @@ class UserModel extends AbstractModel
             }
         }
         return $res;
-    }
-
-    public function isValidNickname()
-    {
-        return static::validateNickname($this->nickname);
     }
 }
