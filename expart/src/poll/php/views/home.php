@@ -4,6 +4,7 @@ namespace view\home;
 
 function index($topics)
 {
+    $topics = escape($topics);
     // 配列の先頭から要素を一つ切り出す
     $topic = array_shift($topics);
     \partials\topic_header_item($topic, true);

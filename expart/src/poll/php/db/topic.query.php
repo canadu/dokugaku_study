@@ -93,4 +93,57 @@ class TopicQuery
             return false;
         }
     }
+
+    /**
+     * トピックを編集
+     */
+    public static function update($topic)
+    {
+        //値のチェック
+        if (!($topic->isValidId() * $topic->isValidTitle() * $topic->isValidPublished())) {
+            return false;
+        }
+
+        $db = new DataSource;
+        $sql = 'UPDATE topics SET published = :published, title = :title WHERE id = :id';
+        return $db->execute($sql, [
+            ':published' => $topic->published,
+            ':title' => $topic->title,
+            ':id' => $topic->id,
+        ]);
+    }
+
+    /**
+     * トピックを作成
+     */
+    public static function insert($topic, $user)
+    {
+        //値のチェック
+        if (!($user->isValidId() * $topic->isValidTitle() * $topic->isValidPublished())) {
+            return false;
+        }
+
+        $db = new DataSource;
+        $sql = 'INSERT into topics(title, published, user_id) VALUES (:title, :published, :user_id)';
+        return $db->execute($sql, [
+            ':title' => $topic->title,
+            ':published' => $topic->published,
+            ':user_id' => $user->id,
+        ]);
+    }
+
+    public static function incrementLikesOrDislikes($comment)
+    {
+        //値のチェック
+        if (!($comment->isValidTopicId() * $comment->isValidAgree())) {
+            return false;
+        }
+        $db = new DataSource;
+        if ($comment->agree) {
+            $sql = 'UPDATE topics SET likes = likes + 1 WHERE id = :topic_id';
+        } else {
+            $sql = 'UPDATE topics SET dislikes = likes + 1 WHERE id = :topic_id';
+        }
+        return $db->execute($sql, [':topic_id' => $comment->topic_id,]);
+    }
 }

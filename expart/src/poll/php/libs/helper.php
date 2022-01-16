@@ -51,18 +51,26 @@ function the_url($path)
     echo get_url($path);
 }
 
-function escape($data) {
-    if(is_array($data)) {
-        foreach($data as $prop => $val) {
+/**
+ * エスケープ処理を行う
+ * 再帰的処理
+ */
+function escape($data)
+{
+    if (is_array($data)) {
+        //配列の場合
+        foreach ($data as $prop => $val) {
             $data[$prop] = escape($val);
         }
         return $data;
     } elseif (is_object($data)) {
-        foreach($data as $prop => $val) {
+        //オブジェクトの場合
+        foreach ($data as $prop => $val) {
             $data->$prop = escape($val);
         }
         return $data;
     } else {
+        //文字列の場合
         return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
     }
 }

@@ -4,94 +4,61 @@ namespace model;
 
 use lib\Msg;
 
-//AbstractModelを継承
 class CommentModel extends AbstractModel
 {
+
     public int $id;
     public int $topic_id;
-    public int $agree;
-    public string $body;
     public string $user_id;
     public int $del_flg;
+    public string $body;
+    public string $agree;
     public string $nickname;
-    //なにか特定のメソッドを通じて値を取得するようなものにアンダースコアをつける！
-    protected static $SESSION_NAME = '_comment';
 
-    // public function isValidId()
-    // {
-    //     return static::validateId($this->id);
-    // }
+    public function isValidAgree()
+    {
+        return static::validateAgree($this->agree);
+    }
 
-    // public static function validateId($val)
-    // {
-    //     $res = true;
-    //     if (empty($val)) {
-    //         Msg::push(Msg::ERROR, 'ユーザーIDを入力してください。');
-    //         $res = false;
-    //     } else {
-    //         if (strlen($val) > 10) {
-    //             Msg::push(Msg::ERROR, 'ユーザーIDは10桁以下で入力してください。');
-    //             $res = false;
-    //         }
-    //         if (!is_alnum($val)) {
-    //             Msg::push(Msg::ERROR, 'ユーザーIDは半角英数字で入力してください');
-    //             $res = false;
-    //         }
-    //     }
-    //     return $res;
-    // }
+    public static function validateAgree($val)
+    {
 
-    // public static function validatePwd($val)
-    // {
-    //     $res = true;
+        $res = true;
 
-    //     if (empty($val)) {
+        if (!isset($val)) {
+            Msg::push(Msg::ERROR, '賛成か反対か選択してください。');
 
-    //         Msg::push(Msg::ERROR, 'パスワードを入力してください。');
-    //         $res = false;
-    //     } else {
+            // publishedが0、または1以外の時
+            if (!($val == 0 || $val == 1)) {
+                Msg::push(Msg::ERROR, '賛成か反対、どちらかの値を選択してください。');
+            }
 
-    //         if (strlen($val) < 4) {
+            $res = false;
+        }
 
-    //             Msg::push(Msg::ERROR, 'パスワードは４桁以上で入力してください。');
-    //             $res = false;
-    //         }
+        return $res;
+    }
 
-    //         if (!is_alnum($val)) {
+    public function isValidBody()
+    {
+        return static::validateBody($this->body);
+    }
 
-    //             Msg::push(Msg::ERROR, 'パスワードは半角英数字で入力してください。');
-    //             $res = false;
-    //         }
-    //     }
+    public static function validateBody($val)
+    {
+        $res = true;
 
-    //     return $res;
-    // }
+        if (mb_strlen($val) > 100) {
 
-    // public function isValidPwd()
-    // {
-    //     return static::validatePwd($this->pwd);
-    // }
+            Msg::push(Msg::ERROR, 'コメントは100文字以内で入力してください。');
+            $res = false;
+        }
 
+        return $res;
+    }
 
-    // public static function validateNickname($val)
-    // {
-    //     $res = true;
-
-    //     if (empty($val)) {
-    //         Msg::push(Msg::ERROR, 'ニックネームを入力してください。');
-    //         $res = false;
-    //     } else {
-
-    //         if (mb_strlen($val) > 10) {
-    //             Msg::push(Msg::ERROR, 'ニックネームは１０桁以下で入力してください。');
-    //             $res = false;
-    //         }
-    //     }
-    //     return $res;
-    // }
-
-    // public function isValidNickname()
-    // {
-    //     return static::validateNickname($this->nickname);
-    // }
+    public function isValidTopicId()
+    {
+        return TopicModel::validateId($this->topic_id);
+    }
 }
