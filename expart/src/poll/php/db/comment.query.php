@@ -26,4 +26,21 @@ class CommentQuery
         $result = $db->select($sql, [':id' => $topic->id], DataSource::CLS, CommentModel::class);
         return $result;
     }
+
+    public static function insert($comment)
+    {
+        //値のチェック
+        if (!($comment->isValidTopicId() * $comment->isValidBody() * $comment->isValidAgree())) {
+            return false;
+        }
+
+        $db = new DataSource;
+        $sql = 'INSERT into comments(topic_id, agree, body, user_id) VALUES (:topic_id, :agree, :body, :user_id)';
+        return $db->execute($sql, [
+            ':topic_id' => $comment->topic_id,
+            ':agree' => $comment->agree,
+            ':body' => $comment->body,
+            ':user_id' => $comment->user_id,
+        ]);
+    }
 }

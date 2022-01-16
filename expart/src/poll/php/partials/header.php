@@ -51,6 +51,7 @@ function header()
             <!-- ログインフォーム部分 -->
             <main class="container py-3">
             <?php
+            //pushで追加された処理をここで表示する
             Msg::flush();
         }
             ?>

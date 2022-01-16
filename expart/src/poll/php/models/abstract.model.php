@@ -37,7 +37,7 @@ abstract class AbstractModel
     }
 
     /**
-     * 
+     * セッションからデータを取得し、セッションの情報を空にする
      */
     public static function getSessionAndFlush()
     {

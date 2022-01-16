@@ -24,8 +24,8 @@ function route(string $rPath, string $methods): void
         $fn = "\\controller\\{$rPath}\\{$methods}";
         $fn();
     } catch (throwable $e) {
-        Msg::push(Msg::DEBUG, $e->getMessage());
-        Msg::push(Msg::DEBUG, '何かがおかしいようです..');
-        require_once SOURCE_BASE . "/views/404.php";
+        Msg::push(Msg::ERROR, $e->getMessage());
+        Msg::push(Msg::ERROR, '何かがおかしいようです..');
+        redirect('404');
     }
 }
