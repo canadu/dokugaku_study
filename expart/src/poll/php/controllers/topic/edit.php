@@ -9,7 +9,7 @@ use model\TopicModel;
 use model\UserModel;
 use Throwable;
 
-function get()
+function get() : void
 {
     Auth::requireLogin();
 
@@ -21,7 +21,7 @@ function get()
         return;
     }
 
-    $topic = new TopicModel;
+    $topic = new TopicModel();
     $topic->id = get_param('topic_id', null, false);
     $user = unserialize(UserModel::getSession());
     Auth::requirePermission($topic->id, $user);
@@ -29,18 +29,19 @@ function get()
     \view\topic\edit\index($fetchedTopic, true);
 }
 
-function post()
+function post() : void
 {
     Auth::requireLogin();
 
-    $topic = new TopicModel;
+    $topic = new TopicModel();
     $topic->id = get_param('topic_id', null);
     $topic->title = get_param('title', null);
     $topic->published = get_param('published', null);
 
     $user = unserialize(UserModel::getSession());
     Auth::requirePermission($topic->id, $user);
-
+    $is_success = false;
+    
     try {
         $is_success = TopicQuery::update($topic);
     } catch (Throwable $e) {

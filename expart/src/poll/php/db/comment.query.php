@@ -4,10 +4,16 @@ namespace db;
 
 use db\DataSource;
 use model\CommentModel;
+use model\TopicModel;
 
 class CommentQuery
 {
-    public static function fetchByTopicId($topic)
+    /**
+     * ユーザーに紐づくコメントを取得
+     * @param TopicModel $topic
+     * @return array<mixed> | bool 
+     */
+    public static function fetchByTopicId(TopicModel $topic) : array | bool
     {
         if (!$topic->isValidId()) {
             return false;
@@ -27,14 +33,19 @@ class CommentQuery
         return $result;
     }
 
-    public static function insert($comment)
+    /**
+     * 画面で入力されたコメントをDBに登録
+     * @param CommentModel $comment
+     * @return bool 
+     */
+    public static function insert(CommentModel $comment) : bool
     {
         //値のチェック
         if (!($comment->isValidTopicId() * $comment->isValidBody() * $comment->isValidAgree())) {
             return false;
         }
 
-        $db = new DataSource;
+        $db = new DataSource();
         $sql = 'INSERT into comments(topic_id, agree, body, user_id) VALUES (:topic_id, :agree, :body, :user_id)';
         return $db->execute($sql, [
             ':topic_id' => $comment->topic_id,

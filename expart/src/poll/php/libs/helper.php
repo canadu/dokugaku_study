@@ -1,6 +1,13 @@
 <?php
 
-function get_param($key, $default_val, $is_post = true)
+/**
+* ユーザーに紐づいたトピックの件数を取得
+* @param string $key
+* @param mixed $default_val
+* @param bool $is_post
+* @return mixed
+*/
+function get_param($key, $default_val, $is_post = true) : mixed
 {
     //スーパーグローバル変数はここでアクセスするようにする
     $array = $is_post ? $_POST : $_GET;
@@ -41,12 +48,21 @@ function get_url(string $path): string
     return BASE_CONTEXT_PATH . trim($path, '/');
 }
 
-function is_alnum($val)
+/**
+ * 正規表現(英数字チェック)
+ * @param string $val
+ * @return int | bool
+ */
+function is_alnum($val) : int | bool
 {
     return preg_match("/^[a-zA-Z0-9]+$/", $val);
 }
 
-function the_url($path)
+/**
+ * BASE_CONTEXT_PATHを付けたURLを返却する
+ * @param string $path
+ */
+function the_url($path) : void
 {
     echo get_url($path);
 }
@@ -54,8 +70,10 @@ function the_url($path)
 /**
  * エスケープ処理を行う
  * 再帰的処理
+ * @param mixed $data
+ * @return mixed
  */
-function escape($data)
+function escape($data) : mixed
 {
     if (is_array($data)) {
         //配列の場合

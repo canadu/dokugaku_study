@@ -3,7 +3,6 @@
 namespace lib;
 
 use Throwable;
-//use Error;
 
 function route(string $rPath, string $methods): void
 {

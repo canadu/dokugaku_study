@@ -3,11 +3,17 @@
 namespace partials;
 
 use lib\Auth;
-
-function topic_header_item($topic, $from_top_page)
+use model\TopicModel;
+use model\UserModel;
+/**
+ * homeページ上部のトピックを出力する
+ * @param TopicModel $topic
+ * @param bool $from_top_page
+*/
+function topic_header_item(TopicModel $topic, bool $from_top_page) : void
 {
-
-?>
+    //phpここまで==============================================
+    ?>
     <div class="row">
         <div class="col">
             <!-- 左側 -->
@@ -19,11 +25,17 @@ function topic_header_item($topic, $from_top_page)
             <?php comment_form($topic) ?>
         </div>
     </div>
-<?php
+    <?php
+    //phpここから==============================================
 }
-function chart($topic)
+/**
+ * homeページ上部のグラフを出力
+ * @param TopicModel $topic
+*/
+function chart(TopicModel $topic) : void
 {
-?>
+    //phpここまで==============================================
+    ?>
     <canvas id="chart" width="400" height="400" data-likes="<?php echo $topic->likes; ?>" data-dislikes="<?php echo $topic->dislikes; ?>">
         <style>
             #chart {
@@ -31,11 +43,18 @@ function chart($topic)
             }
         </style>
     </canvas>
-<?php
+    <?php
+    //phpここから==============================================
 }
-function topic_main($topic, $from_top_page)
+/**
+ * homeページ上部のアンケートの投票結果を出力
+ * @param TopicModel|UserModel $topic nicknameはTopicModelにはない
+ * @param bool $from_top_page
+*/
+function topic_main(TopicModel|UserModel $topic, bool $from_top_page) : void
 {
-?>
+    //phpここまで==============================================
+    ?>
     <div>
         <?php if ($from_top_page) : ?>
             <!-- トップページから遷移してきた場合 -->
@@ -65,11 +84,18 @@ function topic_main($topic, $from_top_page)
             </div>
         </div>
     </div>
-<?php
+    <?php
+    //phpここから==============================================
 }
-function comment_form($topic)
+
+/**
+ * homeページ上部のアンケート部分を出力
+ * @param TopicModel $topic
+*/
+function comment_form(TopicModel $topic) : void
 {
-?>
+    //phpここまで==============================================
+    ?>
     <?php if (Auth::isLogin()) : ?>
         <form action="<?php the_url('topic/detail'); ?>" method="POST">
             <span class="h4">あなたは賛成？それとも反対？</span>
@@ -101,5 +127,5 @@ function comment_form($topic)
             <a href="<?php the_url('login'); ?>" class="btn btn-lg btn-success">ログインはこちら</a>
         </div>
     <?php endif; ?>
-<?php
+    <?php
 }

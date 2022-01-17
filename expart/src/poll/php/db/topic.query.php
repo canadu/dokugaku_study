@@ -5,11 +5,16 @@ namespace db;
 use db\DataSource;
 use model\TopicModel;
 use model\UserModel;
-
+use model\CommentModel;
 
 class TopicQuery
 {
-    public static function fetchByUserID($user)
+    /**
+     * ユーザーが投稿したトピックを全件取得
+     * @param UserModel $user
+     * @return array<mixed> | bool 
+     */
+    public static function fetchByUserID(UserModel $user) : array | bool
     {
         if (!$user->isValidId()) {
             return false;
@@ -24,7 +29,13 @@ class TopicQuery
         return $result;
     }
 
-    public static function fetchById($topic)
+    /**
+     * ユーザーが投稿したトピックの中から指定のトピックを取得
+     * @param TopicModel $topic
+     * @return mixed
+     *
+     */ 
+    public static function fetchById(TopicModel $topic) : mixed
     {
         if (!$topic->isValidId()) {
             return false;
@@ -46,7 +57,11 @@ class TopicQuery
         return $result;
     }
 
-    public static function fetchPublishedTopics()
+    /**
+     * ユーザーが投稿したトピックの中から公開済みのトピックを取得する
+     * @return array<mixed>
+     */
+    public static function fetchPublishedTopics() : array
     {
         $db = new DataSource();
         $sql = 'SELECT 
@@ -58,22 +73,34 @@ class TopicQuery
                     t.user_id = u.id 
                 WHERE t.del_flg != 1 
                     AND u.del_flg !=1 
+                    AND t.published != 0 
                 ORDER BY t.id DESC';
         $result = $db->select($sql, [], DataSource::CLS, TopicModel::class);
         return $result;
     }
 
-    public static function incrementViewCount($topic)
+    /**
+     * 閲覧数をインクリメントする
+     * @param TopicModel $topic
+     * @return bool
+     */
+    public static function incrementViewCount(TopicModel $topic) : bool
     {
         if (!$topic->isValidId()) {
             return false;
         }
-        $db = new DataSource;
+        $db = new DataSource();
         $sql = 'UPDATE topics SET views = views + 1 WHERE id = :id';
         return $db->execute($sql, [':id' => $topic->id]);
     }
 
-    public static function isUserOwnTopic($topic_id, $user)
+    /**
+     * ユーザーに紐づいたトピックの件数を取得
+     * @param int $topic_id
+     * @param UserModel $user
+     * @return bool
+     */
+    public static function isUserOwnTopic(int $topic_id, UserModel $user) : bool
     {
         if (!(TopicModel::validateId($topic_id) && $user->isValidId())) {
             return false;
@@ -95,16 +122,18 @@ class TopicQuery
     }
 
     /**
-     * トピックを編集
+     * トピックを編集する
+     * @param TopicModel $topic
+     * @return bool
      */
-    public static function update($topic)
+    public static function update(TopicModel $topic) : bool
     {
         //値のチェック
         if (!($topic->isValidId() * $topic->isValidTitle() * $topic->isValidPublished())) {
             return false;
         }
 
-        $db = new DataSource;
+        $db = new DataSource();
         $sql = 'UPDATE topics SET published = :published, title = :title WHERE id = :id';
         return $db->execute($sql, [
             ':published' => $topic->published,
@@ -114,16 +143,19 @@ class TopicQuery
     }
 
     /**
-     * トピックを作成
+     * トピックを登録する
+     * @param TopicModel $topic
+     * @param UserModel $user
+     * @return bool
      */
-    public static function insert($topic, $user)
+    public static function insert(TopicModel $topic, UserModel $user) : bool
     {
         //値のチェック
         if (!($user->isValidId() * $topic->isValidTitle() * $topic->isValidPublished())) {
             return false;
         }
 
-        $db = new DataSource;
+        $db = new DataSource();
         $sql = 'INSERT into topics(title, published, user_id) VALUES (:title, :published, :user_id)';
         return $db->execute($sql, [
             ':title' => $topic->title,
@@ -132,13 +164,18 @@ class TopicQuery
         ]);
     }
 
-    public static function incrementLikesOrDislikes($comment)
+    /**
+     * トピックの賛成、反対を更新する
+     * @param CommentModel $comment
+     * @return bool
+     */
+    public static function incrementLikesOrDislikes(CommentModel $comment) : bool
     {
         //値のチェック
         if (!($comment->isValidTopicId() * $comment->isValidAgree())) {
             return false;
         }
-        $db = new DataSource;
+        $db = new DataSource();
         if ($comment->agree) {
             $sql = 'UPDATE topics SET likes = likes + 1 WHERE id = :topic_id';
         } else {

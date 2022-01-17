@@ -13,16 +13,22 @@ class UserModel extends AbstractModel
     public int $del_flg;
 
     //なにか特定のメソッドを通じて値を取得するようなものにアンダースコアをつける！
-    protected static $SESSION_NAME = '_user';
-
-    /** 
-     * ユーザーIDの入力チェック
+    protected static mixed $SESSION_NAME = '_user';
+    
+    /**
+     * ユーザーIDの入力チェックの結果を返す
+     * @return bool
     */
-    public function isValidId()
+    public function isValidId() : bool
     {
         return static::validateId($this->id);
     }
-    public static function validateId($val)
+    /**
+     *ユーザーIDのチェック
+     *@param string|null $val
+     *@return bool
+    */
+    public static function validateId(string | null $val) : bool
     {
         $res = true;
         if (empty($val)) {
@@ -40,55 +46,57 @@ class UserModel extends AbstractModel
         }
         return $res;
     }
-
-    /** 
-     * ユーザーパスワードの入力チェック
+    /**
+     *ユーザーパスワードの入力チェックの結果を返す
+     * @return bool
     */
-    public function isValidPwd()
+    public function isValidPwd() : bool
     {
         return static::validatePwd($this->pwd);
     }
-    public static function validatePwd($val)
+    /**
+     *ユーザーパスワードのチェック
+     *@param string|null $val
+     *@return bool
+    */
+    public static function validatePwd(string | null $val) : bool
     {
         $res = true;
-
         if (empty($val)) {
-
             Msg::push(Msg::ERROR, 'パスワードを入力してください。');
             $res = false;
         } else {
-
             if (strlen($val) < 4) {
-
                 Msg::push(Msg::ERROR, 'パスワードは４桁以上で入力してください。');
                 $res = false;
             }
-
             if (!is_alnum($val)) {
-
                 Msg::push(Msg::ERROR, 'パスワードは半角英数字で入力してください。');
                 $res = false;
             }
         }
-
         return $res;
     }
-
-    /**
-     * ニックネームの入力チェック
-     */
-    public function isValidNickname()
+    /*
+     *ニックネームの入力チェックの結果を返す
+     * @return bool
+    */
+    public function isValidNickname() : bool
     {
         return static::validateNickname($this->nickname);
     }
-    public static function validateNickname($val)
+    /**
+     *ニックネームのチェック
+     *@param string|null $val
+     *@return bool
+    */
+    public static function validateNickname(string | null $val) : bool
     {
         $res = true;
         if (empty($val)) {
             Msg::push(Msg::ERROR, 'ニックネームを入力してください。');
             $res = false;
         } else {
-
             if (mb_strlen($val) > 10) {
                 Msg::push(Msg::ERROR, 'ニックネームは１０桁以下で入力してください。');
                 $res = false;

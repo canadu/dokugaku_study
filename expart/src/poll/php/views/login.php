@@ -2,9 +2,13 @@
 
 namespace view\login;
 
-function index()
+/**
+ * ログインページを表示する
+*/
+function index() : void
 {
-?>
+    //phpここまで==============================================
+    ?>
                 <!-- sr-onlyは画面上には表示されない -->
                 <h1 class="sr-only">ログイン</h1>
                 <div class="mt-5">
@@ -32,4 +36,5 @@ function index()
                         </form>
                     </div>
                 </div>
-<?php } ?>
+    <?php
+}
