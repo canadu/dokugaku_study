@@ -2,9 +2,13 @@
 
 namespace view\register;
 
-function index()
+/**
+* アカウントを登録する
+*/
+function index() : void
 {
-?>
+    //phpここまで==============================================
+    ?>
                 <h1 class="sr-only">登録</h1>
                 <div class="mt-5">
                     <div class="text-center mb-4">
@@ -35,4 +39,5 @@ function index()
                         </form>
                     </div>
                 </div>
-<?php } ?>
+    <?php
+}

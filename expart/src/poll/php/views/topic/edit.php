@@ -2,11 +2,14 @@
 
 namespace view\topic\edit;
 
-function index($topic, $is_edit)
+use model\TopicModel;
+
+function index(TopicModel $topic, bool $is_edit) : void
 {
     $header_title = $is_edit ? 'トピックの編集' : 'トピックの作成';
     $submit_title = $is_edit ? '編集' : '作成';
-?>
+    //phpここまで==============================================
+    ?>
     <h1 class="h2 mb-3"><?php echo $header_title; ?></h1>
     <div class="bg-white p-4 shadow-sm mx-auto rounded">
         <form action="<?php echo CURRENT_URI; ?>" method="POST">
@@ -32,5 +35,5 @@ function index($topic, $is_edit)
             </div>
         </form>
     </div>
-<?php
+    <?php
 }

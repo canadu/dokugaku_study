@@ -2,9 +2,13 @@
 
 namespace partials;
 
-function footer()
+/**
+* フッターを出力
+*/
+function footer() : void
 {
-?>
+    //phpここまで==============================================
+    ?>
             </main>
             <footer class="text-center p-3">
                 <span class="text-muted">&copy; CodeMafia</span>
@@ -12,4 +16,5 @@ function footer()
             </div>
     </body>
     </html>
-<?php } ?>
+    <?php
+}

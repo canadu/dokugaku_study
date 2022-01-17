@@ -9,7 +9,7 @@ use model\TopicModel;
 use model\UserModel;
 use Throwable;
 
-function get()
+function get() : void
 {
     Auth::requireLogin();
 
@@ -18,7 +18,7 @@ function get()
 
     //セッションが取得できない場合
     if (empty($topic)) {
-        $topic = new TopicModel;
+        $topic = new TopicModel();
         //editを使用するためダミーで値を設定する
         $topic->id = -1;
         $topic->title = '';
@@ -28,10 +28,10 @@ function get()
     \view\topic\edit\index($topic, false);
 }
 
-function post()
+function post() : void
 {
     Auth::requireLogin();
-    $topic = new TopicModel;
+    $topic = new TopicModel();
     $topic->id = get_param('topic_id', -1);
     $topic->title = get_param('title', '');
     $topic->published = get_param('published', 1);

@@ -44,7 +44,7 @@ class DataSource
      *  @param string $type
      *  @param string $cls
      */
-    public function select(string $sql = "", array $params = [], string $type = '', string $cls = '')
+    public function select(string $sql = "", array $params = [], string $type = '', string $cls = '') : mixed
     {
         $stmt = $this->executeSql($sql, $params);
         if ($type === static::CLS) {
@@ -62,7 +62,7 @@ class DataSource
      *  @param string $cls
 
      */
-    public function selectOne(string $sql = "", array $params = [], string $type = '', string $cls = '')
+    public function selectOne(string $sql = "", array $params = [], string $type = '', string $cls = '') : mixed
     {
         $result = $this->select($sql, $params, $type, $cls);
         return count($result) > 0 ? $result[0] : false;
@@ -73,7 +73,7 @@ class DataSource
      *  @param string $sql
      *  @param array<mixed> $params
      */
-    public function execute(string $sql = "", array $params = [])
+    public function execute(string $sql = "", array $params = []) : bool
     {
         $this->executeSql($sql, $params);
         return  $this->sqlResult;
@@ -83,7 +83,7 @@ class DataSource
      *  @param string $sql
      *  @param array<mixed> $params
      */
-    private function executeSql(string $sql, array $params)
+    private function executeSql(string $sql, array $params) : PDOStatement
     {
         $stmt = $this->conn->prepare($sql);
         $this->sqlResult = $stmt->execute($params);

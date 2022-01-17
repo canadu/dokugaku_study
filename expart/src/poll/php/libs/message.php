@@ -5,21 +5,19 @@ namespace lib;
 use model\AbstractModel;
 use Throwable;
 
-use function PHPUnit\Framework\isNull;
-
 class Msg extends AbstractModel
 {
-
-    protected static $SESSION_NAME = '_msg';
+    protected static mixed $SESSION_NAME = '_msg';
     public const ERROR = 'error';
     public const INFO = 'info';
     public const DEBUG = 'debug';
 
     /**
-     * セッション上にメッセージを追加するメソッド
-     *
-     */
-    public static function push($type, $msg)
+    * セッション上にメッセージを追加するメソッド
+    * @param mixed $type
+    * @param string $msg
+    */
+    public static function push($type, $msg) : void
     {
         if (!is_array(Msg::getSession())) {
             Msg::init();
@@ -28,11 +26,10 @@ class Msg extends AbstractModel
         $msgs[$type][] = $msg;
         static::setSession($msgs);
     }
-
     /**
      *メッセージを表示するメソッド
      */
-    public static function flush()
+    public static function flush() : void
     {
         try {
             $msg_with_type = Msg::getSessionAndFlush() ?? [];
@@ -40,6 +37,7 @@ class Msg extends AbstractModel
             echo '<div id="messages">';
             foreach ($msg_with_type as $type => $msgs) {
                 if ($type === static::DEBUG && !DEBUG) {
+                    //メッセージタイプがDebug、且つ、フラグが本番環境の場合はメッセージを表示しない
                     continue;
                 }
                 $color = $type === static::INFO ? 'alert-info' : 'alert-danger';
@@ -55,11 +53,10 @@ class Msg extends AbstractModel
             Msg::push(Msg::ERROR, 'Msg::Flushで例外が発生しました。');
         }
     }
-
     /**
      *初期化
      */
-    private static function init()
+    private static function init() : void
     {
         static::setSession([
             static::ERROR => [],

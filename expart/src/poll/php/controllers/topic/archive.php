@@ -7,14 +7,13 @@ use lib\Msg;
 use db\TopicQuery;
 use model\UserModel;
 
-function get()
+function get() : void
 {
     //ログインしているかの確認
     Auth::requireLogin();
 
     //セッション情報を取得
     $user = unserialize(UserModel::getSession());
-    
     //ユーザーに紐づくトピックを取得
     $topics = TopicQuery::fetchByUserID($user);
 

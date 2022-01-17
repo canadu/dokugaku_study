@@ -7,12 +7,13 @@ use Error;
 //抽象クラス
 abstract class AbstractModel
 {
-    protected static $SESSION_NAME = null;
+    protected static mixed $SESSION_NAME = null;
 
     /**
-     *セッション情報を設定する 
-     */
-    public static function setSession($val)
+    *セッション情報を設定する
+    * @param mixed $val
+    */
+    public static function setSession($val) : void
     {
         if (empty(static::$SESSION_NAME)) {
             throw new Error('$SESSION_NAMEを設定してください。');
@@ -21,25 +22,27 @@ abstract class AbstractModel
     }
 
     /**
-     *セッション情報を取得する 
-     */
-    public static function getSession()
+    *セッション情報を取得する
+    *@return mixed
+    */
+    public static function getSession() : mixed
     {
         return $_SESSION[static::$SESSION_NAME] ?? null;
     }
 
     /**
-     *セッション情報をクリアする 
+     *セッション情報をクリアする
      */
-    public static function clearSession()
+    public static function clearSession() : void
     {
         static::setSession(null);
     }
 
     /**
      * セッションからデータを取得し、セッションの情報を空にする
+     * @return mixed
      */
-    public static function getSessionAndFlush()
+    public static function getSessionAndFlush() : mixed
     {
         try {
             return static::getSession();

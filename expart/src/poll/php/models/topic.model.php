@@ -6,7 +6,6 @@ use lib\Msg;
 
 class TopicModel extends AbstractModel
 {
-
     public int $id;
     public string $title;
     public int $published;
@@ -17,32 +16,45 @@ class TopicModel extends AbstractModel
     public int $del_flg;
 
     //なにか特定のメソッドを通じて値を取得するようなものにアンダースコアをつける！
-    protected static $SESSION_NAME = '_topic';
+    protected static mixed $SESSION_NAME = '_topic';
 
-    public function isValidId()
+    /**
+     * トピックIDチェックの結果を返す
+     * @return bool
+    */
+    public function isValidId() : bool
     {
         return static::validateId($this->id);
     }
-
-    public static function validateId($val)
+    /**
+     * トピックIDのチェック
+     *@param int|null $val
+     *@return bool
+    */
+    public static function validateId(int | null $val) : bool
     {
         $res = true;
 
         if (empty($val) || !is_numeric($val)) {
-
             Msg::push(Msg::ERROR, 'パラメータが不正です。');
             $res = false;
         }
-
         return $res;
     }
-
-    public function isValidTitle()
+    /**
+     * タイトルチェックの結果を返す
+     * @return bool
+    */
+    public function isValidTitle() : bool
     {
         return static::validateTitle($this->title);
     }
-
-    public static function validateTitle($val)
+    /**
+     *タイトル項目のチェック
+     *@param string|null $val
+     *@return bool
+    */
+    public static function validateTitle(string | null $val) : bool
     {
         $res = true;
 
@@ -50,39 +62,41 @@ class TopicModel extends AbstractModel
             Msg::push(Msg::ERROR, 'タイトルを入力してください。');
             $res = false;
         } else {
-
             if (mb_strlen($val) > 30) {
-
                 Msg::push(Msg::ERROR, 'タイトルは30文字以内で入力してください。');
                 $res = false;
             }
         }
-
         return $res;
     }
 
-    public function isValidPublished()
+    /**
+     * 公開チェックの結果を返す
+     * @return bool
+    */
+    public function isValidPublished() : bool
     {
         return static::validatePublished($this->published);
     }
-
-    public static function validatePublished($val)
+    /**
+     *タイトル項目のチェック
+     *@param int|null $val
+     *@return bool
+    */
+    public static function validatePublished($val) : bool
     {
         $res = true;
 
         if (!isset($val)) {
-
             Msg::push(Msg::ERROR, '公開するか選択してください。');
             $res = false;
         } else {
             // 0、または1以外の時
             if (!($val == 0 || $val == 1)) {
-
                 Msg::push(Msg::ERROR, '公開ステータスが不正です。');
                 $res = false;
             }
         }
-
         return $res;
     }
 }

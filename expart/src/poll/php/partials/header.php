@@ -2,12 +2,16 @@
 
 namespace partials;
 
-use lib\auth;
+use lib\Auth;
 use lib\Msg;
 
-function header()
+/**
+* ヘッダーを出力
+*/
+function header() : void
 {
-?>
+    //phpここまで==============================================
+    ?>
     <!DOCTYPE html>
     <html lang="ja">
 
@@ -19,7 +23,8 @@ function header()
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="//fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
         <!-- <link rel="stylesheet" href="<?php echo BASE_CSS_PATH; ?>app.css"> -->
-        <link rel="stylesheet" href="<?php echo (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . BASE_CONTEXT_PATH . BASE_CSS_PATH; ?>app.css">
+        <link rel="stylesheet" href="<?php echo (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] .
+        BASE_CONTEXT_PATH . BASE_CSS_PATH; ?>app.css">
         <title>みんなのアンケート</title>
     </head>
 
@@ -33,14 +38,14 @@ function header()
                         <span class="h2 font-weight-bold mb-0">みんなのアンケート</span>
                     </a>
                     <div class="col-md-auto">
-                        <?php if (auth::isLogin()) : ?>
-                            <?php //ログインしているとき 
+                        <?php if (auth::isLogin()) :?>
+                            <?php //ログインしているとき
                             ?>
                             <a href="<?php the_url('topic/create'); ?>" class="btn btn-primary mr-2">投稿</a>
                             <a href="<?php the_url('topic/archive'); ?>" class="mr-2">過去の投稿</a>
                             <a href="<?php the_url('logout'); ?>">ログアウト</a>
-                        <?php else : ?>
-                            <?php //ログインしていないとき 
+                        <?php else :?>
+                            <?php //ログインしていないとき
                             ?>
                             <a href="<?php the_url('register'); ?>" class="btn btn-primary mr-2">登録</a>
                             <a href="<?php the_url('login'); ?>">ログイン</a>
@@ -53,5 +58,4 @@ function header()
             <?php
             //pushで追加された処理をここで表示する
             Msg::flush();
-        }
-            ?>
+}
