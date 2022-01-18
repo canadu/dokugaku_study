@@ -7,7 +7,7 @@ use lib\Msg;
 use db\TopicQuery;
 use model\UserModel;
 
-function get() : void
+function get(): void
 {
     //ログインしているかの確認
     Auth::requireLogin();

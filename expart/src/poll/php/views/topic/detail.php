@@ -9,7 +9,7 @@ use model\TopicModel;
 *@param TopicModel $topic
 *@param array<mixed> $comments
 */
-function index(TopicModel $topic, array $comments) : void
+function index(TopicModel $topic, array $comments): void
 {
     $topic = escape($topic);
     $comments = escape($comments);

@@ -17,7 +17,7 @@ class CommentModel extends AbstractModel
      * 賛否項目チェックの結果を返す
      * @return bool
     */
-    public function isValidAgree() : bool
+    public function isValidAgree(): bool
     {
         return static::validateAgree($this->agree);
     }
@@ -26,7 +26,7 @@ class CommentModel extends AbstractModel
      *@param string|null $val
      *@return bool
     */
-    public static function validateAgree(string | null $val) : bool
+    public static function validateAgree(string | null $val): bool
     {
         $res = true;
         if (!isset($val)) {
@@ -44,7 +44,7 @@ class CommentModel extends AbstractModel
      * 本文チェックの結果を返す
      * @return bool
      */
-    public function isValidBody() : bool
+    public function isValidBody(): bool
     {
         return static::validateBody($this->body);
     }
@@ -53,7 +53,7 @@ class CommentModel extends AbstractModel
      *@param string|null $val
      *@return bool
      */
-    public static function validateBody(string | null $val) : bool
+    public static function validateBody(string | null $val): bool
     {
         $res = true;
         if (mb_strlen($val) > 100) {
@@ -66,7 +66,7 @@ class CommentModel extends AbstractModel
      * トピックIDのチェック結果を返す
      *@return bool
      */
-    public function isValidTopicId() : bool
+    public function isValidTopicId(): bool
     {
         return TopicModel::validateId($this->topic_id);
     }

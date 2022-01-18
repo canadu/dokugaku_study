@@ -6,7 +6,7 @@ namespace view\home;
  * homeページを出力する
  * @param array<mixed> $topics
 */
-function index(array $topics) : void
+function index(array $topics): void
 {
     $topics = escape($topics);
     // 配列の先頭から要素を一つ切り出す

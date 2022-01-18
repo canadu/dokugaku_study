@@ -12,7 +12,7 @@ class UserQuery
      * @param string $id
      * @return mixed
      */
-    public static function fetchById(string $id) : mixed
+    public static function fetchById(string $id): mixed
     {
         $db = new DataSource();
         $result = $db->selectOne(
@@ -29,7 +29,7 @@ class UserQuery
      * @param UserModel $user
      * @return bool
      */
-    public static function insert(UserModel $user) : bool
+    public static function insert(UserModel $user): bool
     {
         $db = new DataSource();
         $sql = 'INSERT INTO users(id,pwd,nickname) VALUES (:id, :pwd, :nickname)';

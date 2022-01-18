@@ -7,7 +7,7 @@
 * @param bool $is_post
 * @return mixed
 */
-function get_param($key, $default_val, $is_post = true) : mixed
+function get_param($key, $default_val, $is_post = true): mixed
 {
     //スーパーグローバル変数はここでアクセスするようにする
     $array = $is_post ? $_POST : $_GET;
@@ -23,7 +23,7 @@ function redirect(string $path): void
     $is_Referer = false;
     if ($path === GO_HOME) {
         $path = get_url('');
-    } else if ($path === GO_REFERER) {
+    } elseif ($path === GO_REFERER) {
         $is_Referer = true;
         $path = $_SERVER['HTTP_REFERER'];
     } else {
@@ -53,7 +53,7 @@ function get_url(string $path): string
  * @param string $val
  * @return int | bool
  */
-function is_alnum($val) : int | bool
+function is_alnum($val): int | bool
 {
     return preg_match("/^[a-zA-Z0-9]+$/", $val);
 }
@@ -62,7 +62,7 @@ function is_alnum($val) : int | bool
  * BASE_CONTEXT_PATHを付けたURLを返却する
  * @param string $path
  */
-function the_url($path) : void
+function the_url($path): void
 {
     echo get_url($path);
 }
@@ -73,7 +73,7 @@ function the_url($path) : void
  * @param mixed $data
  * @return mixed
  */
-function escape($data) : mixed
+function escape($data): mixed
 {
     if (is_array($data)) {
         //配列の場合

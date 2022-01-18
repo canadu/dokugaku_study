@@ -8,7 +8,7 @@ use lib\Msg;
 /**
 * ヘッダーを出力
 */
-function header() : void
+function header(): void
 {
     //phpここまで==============================================
     ?>

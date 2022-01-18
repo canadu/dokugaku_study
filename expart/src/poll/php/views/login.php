@@ -5,7 +5,7 @@ namespace view\login;
 /**
  * ログインページを表示する
 */
-function index() : void
+function index(): void
 {
     //phpここまで==============================================
     ?>

@@ -4,7 +4,7 @@ namespace view\topic\edit;
 
 use model\TopicModel;
 
-function index(TopicModel $topic, bool $is_edit) : void
+function index(TopicModel $topic, bool $is_edit): void
 {
     $header_title = $is_edit ? 'トピックの編集' : 'トピックの作成';
     $submit_title = $is_edit ? '編集' : '作成';
@@ -27,7 +27,10 @@ function index(TopicModel $topic, bool $is_edit) : void
             </div>
             <div class="d-flex align-items-center">
                 <div>
-                    <input type="submit" value="<?php echo $submit_title; ?>" class="btn btn-primary mr-3">
+                    <input type="submit" name="register" value="<?php echo $submit_title; ?>" class="btn btn-primary mr-3">
+                </div>
+                <div>
+                    <input type="submit" name="delete" value="削除" class="btn btn-danger mr-3">
                 </div>
                 <div>
                     <a href=<?php the_url('topic/archive'); ?>>戻る</a>

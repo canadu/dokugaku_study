@@ -17,7 +17,7 @@ class Msg extends AbstractModel
     * @param mixed $type
     * @param string $msg
     */
-    public static function push($type, $msg) : void
+    public static function push($type, $msg): void
     {
         if (!is_array(Msg::getSession())) {
             Msg::init();
@@ -29,7 +29,7 @@ class Msg extends AbstractModel
     /**
      *メッセージを表示するメソッド
      */
-    public static function flush() : void
+    public static function flush(): void
     {
         try {
             $msg_with_type = Msg::getSessionAndFlush() ?? [];
@@ -48,7 +48,6 @@ class Msg extends AbstractModel
             }
             echo '</div>';
         } catch (throwable $e) {
-            $is_success = false;
             Msg::push(Msg::DEBUG, $e->getMessage());
             Msg::push(Msg::ERROR, 'Msg::Flushで例外が発生しました。');
         }
@@ -56,7 +55,7 @@ class Msg extends AbstractModel
     /**
      *初期化
      */
-    private static function init() : void
+    private static function init(): void
     {
         static::setSession([
             static::ERROR => [],

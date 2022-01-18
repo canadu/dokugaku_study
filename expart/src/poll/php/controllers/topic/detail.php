@@ -12,7 +12,7 @@ use model\TopicModel;
 use model\UserModel;
 use Throwable;
 
-function get() : void
+function get(): void
 {
     $topic = new TopicModel();
     $topic->id = get_param('topic_id', null, false);
@@ -33,7 +33,7 @@ function get() : void
     \view\topic\detail\index($fetchedTopic, $comments);
 }
 
-function post() : void
+function post(): void
 {
     Auth::requireLogin();
     $comment = new CommentModel();

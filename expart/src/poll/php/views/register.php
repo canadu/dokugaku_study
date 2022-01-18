@@ -5,7 +5,7 @@ namespace view\register;
 /**
 * アカウントを登録する
 */
-function index() : void
+function index(): void
 {
     //phpここまで==============================================
     ?>

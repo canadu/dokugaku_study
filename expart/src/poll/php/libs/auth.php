@@ -18,7 +18,7 @@ class Auth
      * @param string $pwd
      * @return bool
      */
-    public static function login(string $id, string $pwd) : bool
+    public static function login(string $id, string $pwd): bool
     {
         try {
             //ID、パスワードの入力チェック
@@ -55,7 +55,7 @@ class Auth
      * @param UserModel $user
      * @return bool
      */
-    public static function register(UserModel $user) : bool
+    public static function register(UserModel $user): bool
     {
         $is_success = false;
         try {
@@ -85,7 +85,7 @@ class Auth
      * ログインチェック
      * @return bool
      */
-    public static function isLogin() : bool
+    public static function isLogin(): bool
     {
         try {
             $user = unserialize(UserModel::getSession());
@@ -107,7 +107,7 @@ class Auth
      * ログアウト
      * @return bool
      */
-    public static function logout() : bool
+    public static function logout(): bool
     {
         try {
             UserModel::clearSession();
@@ -122,7 +122,7 @@ class Auth
     /**
      * ログインしていない場合リダイレクトする
      */
-    public static function requireLogin() : void
+    public static function requireLogin(): void
     {
         if (!static::isLogin()) {
             Msg::push(Msg::ERROR, 'ログインしてください');
@@ -136,7 +136,7 @@ class Auth
      * @param UserModel $user
      * @return bool
      */
-    public static function hasPermission($topic_id, $user) : bool
+    public static function hasPermission($topic_id, $user): bool
     {
         return TopicQuery::isUserOwnTopic($topic_id, $user);
     }
@@ -146,7 +146,7 @@ class Auth
      * @param int $topic_id
      * @param UserModel $user
      */
-    public static function requirePermission($topic_id, $user) : void
+    public static function requirePermission($topic_id, $user): void
     {
         if (!static::hasPermission($topic_id, $user)) {
             Msg::push(Msg::ERROR, '編集権限がありません。ログインして再度試してみてください。');

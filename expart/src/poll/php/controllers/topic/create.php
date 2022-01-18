@@ -9,7 +9,7 @@ use model\TopicModel;
 use model\UserModel;
 use Throwable;
 
-function get() : void
+function get(): void
 {
     Auth::requireLogin();
 
@@ -28,7 +28,7 @@ function get() : void
     \view\topic\edit\index($topic, false);
 }
 
-function post() : void
+function post(): void
 {
     Auth::requireLogin();
     $topic = new TopicModel();
