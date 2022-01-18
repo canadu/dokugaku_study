@@ -10,7 +10,7 @@ use model\TopicModel;
  * @param string $title_url
  * @param bool $with_status
 */
-function topic_list_item(TopicModel $topic, string $title_url, bool $with_status) : void
+function topic_list_item(TopicModel $topic, string $title_url, bool $with_status): void
 {
     $published_label = $topic->published  ? '公開' : '非公開';
     $published_cls = $topic->published  ? 'badge-primary' : 'badge-danger';

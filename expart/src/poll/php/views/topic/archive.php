@@ -6,7 +6,7 @@ namespace view\topic\archive;
 * 過去の投稿ページを表示する
 *@param array<mixed> $topics
 */
-function index(array $topics) : void
+function index(array $topics): void
 {
     $topics = escape($topics);
     //phpここまで==============================================

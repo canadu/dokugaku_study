@@ -12,9 +12,9 @@ class TopicQuery
     /**
      * ユーザーが投稿したトピックを全件取得
      * @param UserModel $user
-     * @return array<mixed> | bool 
+     * @return array<mixed> | bool
      */
-    public static function fetchByUserID(UserModel $user) : array | bool
+    public static function fetchByUserID(UserModel $user): array | bool
     {
         if (!$user->isValidId()) {
             return false;
@@ -34,8 +34,8 @@ class TopicQuery
      * @param TopicModel $topic
      * @return mixed
      *
-     */ 
-    public static function fetchById(TopicModel $topic) : mixed
+     */
+    public static function fetchById(TopicModel $topic): mixed
     {
         if (!$topic->isValidId()) {
             return false;
@@ -61,7 +61,7 @@ class TopicQuery
      * ユーザーが投稿したトピックの中から公開済みのトピックを取得する
      * @return array<mixed>
      */
-    public static function fetchPublishedTopics() : array
+    public static function fetchPublishedTopics(): array
     {
         $db = new DataSource();
         $sql = 'SELECT 
@@ -84,7 +84,7 @@ class TopicQuery
      * @param TopicModel $topic
      * @return bool
      */
-    public static function incrementViewCount(TopicModel $topic) : bool
+    public static function incrementViewCount(TopicModel $topic): bool
     {
         if (!$topic->isValidId()) {
             return false;
@@ -100,7 +100,7 @@ class TopicQuery
      * @param UserModel $user
      * @return bool
      */
-    public static function isUserOwnTopic(int $topic_id, UserModel $user) : bool
+    public static function isUserOwnTopic(int $topic_id, UserModel $user): bool
     {
         if (!(TopicModel::validateId($topic_id) && $user->isValidId())) {
             return false;
@@ -126,7 +126,7 @@ class TopicQuery
      * @param TopicModel $topic
      * @return bool
      */
-    public static function update(TopicModel $topic) : bool
+    public static function update(TopicModel $topic): bool
     {
         //値のチェック
         if (!($topic->isValidId() * $topic->isValidTitle() * $topic->isValidPublished())) {
@@ -143,12 +143,30 @@ class TopicQuery
     }
 
     /**
+     * トピックを削除する
+     * @param TopicModel $topic
+     * @return bool
+     */
+    public static function delete(TopicModel $topic): bool
+    {
+        //値のチェック
+        if (!($topic->isValidId())) {
+            return false;
+        }
+        $db = new DataSource();
+        $sql = 'DELETE FROM topics WHERE id = :id';
+        return $db->execute($sql, [
+            ':id' => $topic->id,
+        ]);
+    }
+
+    /**
      * トピックを登録する
      * @param TopicModel $topic
      * @param UserModel $user
      * @return bool
      */
-    public static function insert(TopicModel $topic, UserModel $user) : bool
+    public static function insert(TopicModel $topic, UserModel $user): bool
     {
         //値のチェック
         if (!($user->isValidId() * $topic->isValidTitle() * $topic->isValidPublished())) {
@@ -169,7 +187,7 @@ class TopicQuery
      * @param CommentModel $comment
      * @return bool
      */
-    public static function incrementLikesOrDislikes(CommentModel $comment) : bool
+    public static function incrementLikesOrDislikes(CommentModel $comment): bool
     {
         //値のチェック
         if (!($comment->isValidTopicId() * $comment->isValidAgree())) {

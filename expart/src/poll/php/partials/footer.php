@@ -5,7 +5,7 @@ namespace partials;
 /**
 * フッターを出力
 */
-function footer() : void
+function footer(): void
 {
     //phpここまで==============================================
     ?>

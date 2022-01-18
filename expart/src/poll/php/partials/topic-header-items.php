@@ -5,12 +5,13 @@ namespace partials;
 use lib\Auth;
 use model\TopicModel;
 use model\UserModel;
+
 /**
  * homeページ上部のトピックを出力する
  * @param TopicModel $topic
  * @param bool $from_top_page
 */
-function topic_header_item(TopicModel $topic, bool $from_top_page) : void
+function topic_header_item(TopicModel $topic, bool $from_top_page): void
 {
     //phpここまで==============================================
     ?>
@@ -32,7 +33,7 @@ function topic_header_item(TopicModel $topic, bool $from_top_page) : void
  * homeページ上部のグラフを出力
  * @param TopicModel $topic
 */
-function chart(TopicModel $topic) : void
+function chart(TopicModel $topic): void
 {
     //phpここまで==============================================
     ?>
@@ -51,7 +52,7 @@ function chart(TopicModel $topic) : void
  * @param TopicModel|UserModel $topic nicknameはTopicModelにはない
  * @param bool $from_top_page
 */
-function topic_main(TopicModel|UserModel $topic, bool $from_top_page) : void
+function topic_main(TopicModel|UserModel $topic, bool $from_top_page): void
 {
     //phpここまで==============================================
     ?>
@@ -92,7 +93,7 @@ function topic_main(TopicModel|UserModel $topic, bool $from_top_page) : void
  * homeページ上部のアンケート部分を出力
  * @param TopicModel $topic
 */
-function comment_form(TopicModel $topic) : void
+function comment_form(TopicModel $topic): void
 {
     //phpここまで==============================================
     ?>

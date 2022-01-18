@@ -14,12 +14,11 @@ class UserModel extends AbstractModel
 
     //なにか特定のメソッドを通じて値を取得するようなものにアンダースコアをつける！
     protected static mixed $SESSION_NAME = '_user';
-    
     /**
      * ユーザーIDの入力チェックの結果を返す
      * @return bool
     */
-    public function isValidId() : bool
+    public function isValidId(): bool
     {
         return static::validateId($this->id);
     }
@@ -28,7 +27,7 @@ class UserModel extends AbstractModel
      *@param string|null $val
      *@return bool
     */
-    public static function validateId(string | null $val) : bool
+    public static function validateId(string | null $val): bool
     {
         $res = true;
         if (empty($val)) {
@@ -50,7 +49,7 @@ class UserModel extends AbstractModel
      *ユーザーパスワードの入力チェックの結果を返す
      * @return bool
     */
-    public function isValidPwd() : bool
+    public function isValidPwd(): bool
     {
         return static::validatePwd($this->pwd);
     }
@@ -59,7 +58,7 @@ class UserModel extends AbstractModel
      *@param string|null $val
      *@return bool
     */
-    public static function validatePwd(string | null $val) : bool
+    public static function validatePwd(string | null $val): bool
     {
         $res = true;
         if (empty($val)) {
@@ -81,7 +80,7 @@ class UserModel extends AbstractModel
      *ニックネームの入力チェックの結果を返す
      * @return bool
     */
-    public function isValidNickname() : bool
+    public function isValidNickname(): bool
     {
         return static::validateNickname($this->nickname);
     }
@@ -90,7 +89,7 @@ class UserModel extends AbstractModel
      *@param string|null $val
      *@return bool
     */
-    public static function validateNickname(string | null $val) : bool
+    public static function validateNickname(string | null $val): bool
     {
         $res = true;
         if (empty($val)) {

@@ -11,9 +11,9 @@ class CommentQuery
     /**
      * ユーザーに紐づくコメントを取得
      * @param TopicModel $topic
-     * @return array<mixed> | bool 
+     * @return array<mixed> | bool
      */
-    public static function fetchByTopicId(TopicModel $topic) : array | bool
+    public static function fetchByTopicId(TopicModel $topic): array | bool
     {
         if (!$topic->isValidId()) {
             return false;
@@ -36,9 +36,9 @@ class CommentQuery
     /**
      * 画面で入力されたコメントをDBに登録
      * @param CommentModel $comment
-     * @return bool 
+     * @return bool
      */
-    public static function insert(CommentModel $comment) : bool
+    public static function insert(CommentModel $comment): bool
     {
         //値のチェック
         if (!($comment->isValidTopicId() * $comment->isValidBody() * $comment->isValidAgree())) {
@@ -52,6 +52,25 @@ class CommentQuery
             ':agree' => $comment->agree,
             ':body' => $comment->body,
             ':user_id' => $comment->user_id,
+        ]);
+    }
+
+    /**
+     * トピックのコメントを削除する
+     * @param TopicModel $topic
+     * @return bool
+     */
+    public static function delete(TopicModel $topic): bool
+    {
+        //値のチェック
+        if (!($topic->isValidId())) {
+            return false;
+        }
+
+        $db = new DataSource();
+        $sql = 'DELETE FROM comments WHERE topic_id = :topic_id';
+        return $db->execute($sql, [
+            ':topic_id' => $topic->id,
         ]);
     }
 }

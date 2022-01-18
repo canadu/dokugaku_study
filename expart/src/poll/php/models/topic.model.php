@@ -22,7 +22,7 @@ class TopicModel extends AbstractModel
      * トピックIDチェックの結果を返す
      * @return bool
     */
-    public function isValidId() : bool
+    public function isValidId(): bool
     {
         return static::validateId($this->id);
     }
@@ -31,7 +31,7 @@ class TopicModel extends AbstractModel
      *@param int|null $val
      *@return bool
     */
-    public static function validateId(int | null $val) : bool
+    public static function validateId(int | null $val): bool
     {
         $res = true;
 
@@ -45,7 +45,7 @@ class TopicModel extends AbstractModel
      * タイトルチェックの結果を返す
      * @return bool
     */
-    public function isValidTitle() : bool
+    public function isValidTitle(): bool
     {
         return static::validateTitle($this->title);
     }
@@ -54,7 +54,7 @@ class TopicModel extends AbstractModel
      *@param string|null $val
      *@return bool
     */
-    public static function validateTitle(string | null $val) : bool
+    public static function validateTitle(string | null $val): bool
     {
         $res = true;
 
@@ -74,7 +74,7 @@ class TopicModel extends AbstractModel
      * 公開チェックの結果を返す
      * @return bool
     */
-    public function isValidPublished() : bool
+    public function isValidPublished(): bool
     {
         return static::validatePublished($this->published);
     }
@@ -83,7 +83,7 @@ class TopicModel extends AbstractModel
      *@param int|null $val
      *@return bool
     */
-    public static function validatePublished($val) : bool
+    public static function validatePublished($val): bool
     {
         $res = true;
 

@@ -2,6 +2,7 @@
 
 namespace controller\topic\edit;
 
+use db\CommentQuery;
 use db\TopicQuery;
 use lib\Auth;
 use lib\Msg;
@@ -9,7 +10,7 @@ use model\TopicModel;
 use model\UserModel;
 use Throwable;
 
-function get() : void
+function get(): void
 {
     Auth::requireLogin();
 
@@ -29,7 +30,7 @@ function get() : void
     \view\topic\edit\index($fetchedTopic, true);
 }
 
-function post() : void
+function post(): void
 {
     Auth::requireLogin();
 
@@ -41,19 +42,32 @@ function post() : void
     $user = unserialize(UserModel::getSession());
     Auth::requirePermission($topic->id, $user);
     $is_success = false;
-    
+
+    $registerMode = get_param('register', null);
+    $deleteMode = get_param('delete', null);
+    $msg = '';
     try {
-        $is_success = TopicQuery::update($topic);
+        if (!is_null($registerMode)) {
+            $msg = '更新';
+            $is_success = TopicQuery::update($topic);
+        } elseif (!is_null($deleteMode)) {
+            $msg = '削除';
+            $is_success = TopicQuery::delete($topic);
+            if ($is_success) {
+                //トピックに基づくコメントも削除する
+                $is_success = CommentQuery::delete($topic);
+            }
+        }
     } catch (Throwable $e) {
         Msg::push(Msg::DEBUG, $e->getMessage());
         $is_success = false;
     }
 
     if ($is_success) {
-        Msg::push(Msg::INFO, 'トピックの更新に成功しました。');
+        Msg::push(Msg::INFO, "トピックの{$msg}に成功しました。");
         redirect('topic/archive');
     } else {
-        Msg::push(Msg::ERROR, 'トピックの更新に失敗しました。');
+        Msg::push(Msg::ERROR, "トピックの{$msg}に失敗しました。");
         //エラーになっても入力内容をセッションに保存する
         TopicModel::setSession(serialize($topic));
         redirect(GO_REFERER);

@@ -5,7 +5,7 @@ namespace controller\logout;
 use lib\Auth;
 use lib\Msg;
 
-function get() : void
+function get(): void
 {
     if (Auth::logout()) {
         Msg::push(Msg::INFO, 'ログアウトが成功しました。');
