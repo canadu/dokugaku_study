@@ -43,21 +43,21 @@ function post(): void
 
     $user = unserialize(UserModel::getSession());
     $comment->user_id = $user->id;
-    $is_success = false;
+    $isSuccess = false;
     $db = null;
     try {
         $db = new DataSource();
         $db->begin();
 
-        $is_success = TopicQuery::incrementLikesOrDislikes($comment);
-        if ($is_success && !empty($comment->body)) {
-            $is_success = CommentQuery::insert($comment);
+        $isSuccess = TopicQuery::incrementLikesOrDislikes($comment);
+        if ($isSuccess && !empty($comment->body)) {
+            $isSuccess = CommentQuery::insert($comment);
         }
     } catch (Throwable  $e) {
         Msg::push(Msg::DEBUG, $e->getMessage());
-        $is_success = false;
+        $isSuccess = false;
     } finally {
-        if ($is_success) {
+        if ($isSuccess) {
             $db->commit();
             Msg::push(Msg::INFO, 'コメントの登録に成功しました。');
         } else {

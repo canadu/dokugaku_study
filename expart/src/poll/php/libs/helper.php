@@ -3,15 +3,15 @@
 /**
 * ユーザーに紐づいたトピックの件数を取得
 * @param string $key
-* @param mixed $default_val
+* @param mixed $defaultVal
 * @param bool $is_post
 * @return mixed
 */
-function get_param($key, $default_val, $is_post = true): mixed
+function get_param($key, $defaultVal, $is_post = true): mixed
 {
     //スーパーグローバル変数はここでアクセスするようにする
     $array = $is_post ? $_POST : $_GET;
-    return $array[$key] ?? $default_val;
+    return $array[$key] ?? $defaultVal;
 }
 
 /**

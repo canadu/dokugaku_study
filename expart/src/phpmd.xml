@@ -12,6 +12,8 @@
     <rule ref="rulesets/cleancode.xml" >
         <!-- if文のelseを書くと怒られるのでルールを除外する -->
         <exclude name="ElseExpression" />
+        <!-- 静的アクセスすると怒られるので除外する -->
+        <exclude name="StaticAccess" />
     </rule>      
     <rule ref="rulesets/codesize.xml" />
     <rule ref="rulesets/controversial.xml" />
