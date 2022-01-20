@@ -41,7 +41,7 @@ function post(): void
 
     $user = unserialize(UserModel::getSession());
     Auth::requirePermission($topic->id, $user);
-    $is_success = false;
+    $isSuccess = false;
 
     $registerMode = get_param('register', null);
     $deleteMode = get_param('delete', null);
@@ -49,21 +49,21 @@ function post(): void
     try {
         if (!is_null($registerMode)) {
             $msg = '更新';
-            $is_success = TopicQuery::update($topic);
+            $isSuccess = TopicQuery::update($topic);
         } elseif (!is_null($deleteMode)) {
             $msg = '削除';
-            $is_success = TopicQuery::delete($topic);
-            if ($is_success) {
+            $isSuccess = TopicQuery::delete($topic);
+            if ($isSuccess) {
                 //トピックに基づくコメントも削除する
-                $is_success = CommentQuery::delete($topic);
+                $isSuccess = CommentQuery::delete($topic);
             }
         }
     } catch (Throwable $e) {
         Msg::push(Msg::DEBUG, $e->getMessage());
-        $is_success = false;
+        $isSuccess = false;
     }
 
-    if ($is_success) {
+    if ($isSuccess) {
         Msg::push(Msg::INFO, "トピックの{$msg}に成功しました。");
         redirect('topic/archive');
     } else {

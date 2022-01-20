@@ -39,13 +39,13 @@ function post(): void
     $user = unserialize(UserModel::getSession());
 
     try {
-        $is_success = TopicQuery::insert($topic, $user);
+        $isSuccess = TopicQuery::insert($topic, $user);
     } catch (Throwable $e) {
         Msg::push(Msg::DEBUG, $e->getMessage());
-        $is_success = false;
+        $isSuccess = false;
     }
 
-    if ($is_success) {
+    if ($isSuccess) {
         Msg::push(Msg::INFO, 'トピックの登録に成功しました。');
         redirect('topic/archive');
     } else {

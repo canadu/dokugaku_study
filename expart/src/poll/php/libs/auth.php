@@ -26,13 +26,13 @@ class Auth
                 return false;
             }
 
-            $is_success = false;
+            $isSuccess = false;
             //ユーザーデータを取得
             $user = UserQuery::fetchById($id);
             if (!empty($user) && $user->del_flg !== 1) {
                 //パスワードのチェック
                 if (password_verify($pwd, $user->pwd)) {
-                    $is_success = true;
+                    $isSuccess = true;
                     //セッション変数にオブジェクトを格納する
                     UserModel::setSession(serialize($user));
                 } else {
@@ -43,11 +43,11 @@ class Auth
                 Msg::push(Msg::ERROR, 'ユーザーが見つかりません。');
             }
         } catch (throwable $e) {
-            $is_success = false;
+            $isSuccess = false;
             Msg::push(Msg::DEBUG, $e->getMessage());
             Msg::push(Msg::ERROR, 'ログインの処理でエラーが発生しました。少し時間をおいてから再度お試しください。');
         }
-        return $is_success;
+        return $isSuccess;
     }
 
     /**
@@ -57,20 +57,20 @@ class Auth
      */
     public static function register(UserModel $user): bool
     {
-        $is_success = false;
+        $isSuccess = false;
         try {
             //入力チェック
             if (!($user->isValidId() * $user->isValidPwd() * $user->isValidNickname())) {
                 return false;
             }
-            $exist_user = UserQuery::fetchById($user->id);
-            if (!empty($exist_user)) {
+            $existUser = UserQuery::fetchById($user->id);
+            if (!empty($existUser)) {
                 Msg::push(Msg::ERROR, 'ユーザーが既に存在します。');
                 return false;
             }
             //ユーザーの登録
-            $is_success = UserQuery::insert($user);
-            if ($is_success) {
+            $isSuccess = UserQuery::insert($user);
+            if ($isSuccess) {
                 //セッションを登録
                 UserModel::setSession(serialize($user));
             }
@@ -78,7 +78,7 @@ class Auth
             Msg::push(Msg::DEBUG, $e->getMessage());
             Msg::push(Msg::ERROR, 'ユーザー登録でエラーが発生しました。');
         }
-        return $is_success;
+        return $isSuccess;
     }
 
     /**
