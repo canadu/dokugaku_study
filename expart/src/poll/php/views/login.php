@@ -19,11 +19,11 @@ function index(): void
             <form action="<?php echo CURRENT_URI; ?>" method="POST" novalidate autocomplete="off">
                 <div class="form-group">
                     <label for="">ユーザーID</label>
-                    <input type="text" name="id" id="" class="form-control validate-target" minLength=4 maxLength=10 autofocus tabindex=1>
+                    <input type="text" name="id" class="form-control validate-target" minLength=4 maxLength=10 require autofocus tabindex=1>
                 </div>
                 <div class="form-group">
                     <label for="">パスワード</label>
-                    <input type="password" name="pwd" id="" class="form-control validate-target" minLength=4 tabindex=2>
+                    <input type="password" name="pwd" class="form-control validate-target" minLength=4 require tabindex=2>
                 </div>
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
