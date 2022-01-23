@@ -10,12 +10,12 @@ use model\UserModel;
  * homeページ上部のトピックを出力する
  * @param TopicModel $topic
  * @param bool $from_top_page
-*/
+ */
 function topic_header_item(TopicModel $topic, bool $from_top_page): void
 {
     //phpここまで==============================================
-    ?>
-    <div class="row">
+?>
+    <div class="row my-5">
         <div class="col">
             <!-- 左側 -->
             <?php chart($topic) ?>
@@ -26,36 +26,31 @@ function topic_header_item(TopicModel $topic, bool $from_top_page): void
             <?php comment_form($topic) ?>
         </div>
     </div>
-    <?php
+<?php
     //phpここから==============================================
 }
 /**
  * homeページ上部のグラフを出力
  * @param TopicModel $topic
-*/
+ */
 function chart(TopicModel $topic): void
 {
     //phpここまで==============================================
-    ?>
+?>
     <canvas id="chart" width="400" height="400" data-likes="<?php echo $topic->likes; ?>" data-dislikes="<?php echo $topic->dislikes; ?>">
-        <style>
-            #chart {
-                background-color: gray;
-            }
-        </style>
     </canvas>
-    <?php
+<?php
     //phpここから==============================================
 }
 /**
  * homeページ上部のアンケートの投票結果を出力
  * @param TopicModel|UserModel $topic nicknameはTopicModelにはない
  * @param bool $from_top_page
-*/
+ */
 function topic_main(TopicModel|UserModel $topic, bool $from_top_page): void
 {
     //phpここまで==============================================
-    ?>
+?>
     <div>
         <?php if ($from_top_page) : ?>
             <!-- トップページから遷移してきた場合 -->
@@ -85,31 +80,31 @@ function topic_main(TopicModel|UserModel $topic, bool $from_top_page): void
             </div>
         </div>
     </div>
-    <?php
+<?php
     //phpここから==============================================
 }
 
 /**
  * homeページ上部のアンケート部分を出力
  * @param TopicModel $topic
-*/
+ */
 function comment_form(TopicModel $topic): void
 {
     //phpここまで==============================================
-    ?>
+?>
     <?php if (Auth::isLogin()) : ?>
-        <form action="<?php the_url('topic/detail'); ?>" method="POST">
+        <form action="<?php the_url('topic/detail'); ?>" method="POST" novalidate autocomplete="off">
             <span class="h4">あなたは賛成？それとも反対？</span>
             <input type="hidden" name="topic_id" value="<?php echo $topic->id; ?>">
             <div class="form-group">
-                <textarea class="w-100 border-light" name="body" id="body" rows="5"></textarea>
+                <textarea class="w-100 border-light" name="body" id="body" rows="5" maxlength="100"></textarea>
             </div>
             <div class="container">
                 <div class="row h4 form-group">
                     <div class="col-auto d-flex align-items-center pl-0">
                         <!-- コントロールを横並びにする場合 -->
                         <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" id="agree" name="agree" value=1 checked>
+                            <input class="form-check-input" type="radio" id="agree" name="agree" value=1 checked required>
                             <label for="agree" class="form-check-label">賛成</label>
                         </div>
                         <div class="form-check-inline">
@@ -128,5 +123,5 @@ function comment_form(TopicModel $topic): void
             <a href="<?php the_url('login'); ?>" class="btn btn-lg btn-success">ログインはこちら</a>
         </div>
     <?php endif; ?>
-    <?php
+<?php
 }

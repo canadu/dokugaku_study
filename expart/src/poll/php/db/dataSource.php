@@ -10,6 +10,38 @@ use phpDocumentor\Reflection\Types\Mixed_;
 //vendorディレクトリの階層を指定する
 require __DIR__ . '/../../../vendor/autoload.php';
 
+class PDOSingleTone
+{
+    private static $SingleTone;
+
+    private function __construct($dsn, $username, $password)
+    {
+        //.envの階層を指定する
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
+        $dotenv->load();
+        $this->dbHost = $_ENV['DB_HOST'];
+        $this->dbUsername = $_ENV['DB_USERNAME'];
+        $this->dbPassword = $_ENV['DB_PASSWORD'];
+        $this->dbDatabase = $_ENV['DB_DATABASE'];
+        $dsn = "mysql:host=" . $this->dbHost . ";dbname=" . $this->dbDatabase . ";charset=utf8mb4";
+
+        $this->conn = new PDO($dsn, $this->dbUsername, $this->dbPassword);
+        $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    }
+
+    public static function getInstance($dsn, $username, $password)
+    {
+        if (!isset(self::$SingleTone)) {
+            $instance = new PDOSingleTone($dsn, $username, $password);
+            self::$SingleTone = $instance->conn;
+        }
+        return self::$SingleTone;
+    }
+}
+
+
 class DataSource
 {
     private PDO $conn;
@@ -31,10 +63,8 @@ class DataSource
         $this->dbDatabase = $_ENV['DB_DATABASE'];
         $dsn = "mysql:host=" . $this->dbHost . ";dbname=" . $this->dbDatabase . ";charset=utf8mb4";
 
-        $this->conn = new PDO($dsn, $this->dbUsername, $this->dbPassword);
-        $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        //$this->conn = new PDO($dsn, $this->dbUsername, $this->dbPassword);
+        $this->conn = PdoSingletone::getInstance($dsn, $this->dbUsername, $this->dbPassword);
     }
 
     //取得下データを返す
