@@ -41,7 +41,7 @@
 // php quiz.php 1 30 5 25 2 30 1 15
 
 $total = 0;
-const ONE_HOUTR = 60;
+const ONE_HOUR = 60;
 
 //配列を２つずつに区切る
 $array = array_chunk(array_slice($argv, 1), 2);
@@ -70,7 +70,7 @@ foreach ($keys as $value) {
 }
 
 //テレビの合計視聴時間
-$total = round($total / ONE_HOUTR, 1);
+$total = round($total / ONE_HOUR, 1);
 echo $total . PHP_EOL;
 
 foreach ($sum as $value) {
