@@ -9,15 +9,14 @@ function index(TopicModel $topic, bool $is_edit): void
     $header_title = $is_edit ? 'トピックの編集' : 'トピックの作成';
     $submit_title = $is_edit ? '編集' : '作成';
     //phpここまで==============================================
-?>
+    ?>
     <h1 class="h2 mb-3"><?php echo $header_title; ?></h1>
     <div class="bg-white p-4 shadow-sm mx-auto rounded">
-        <form class="validate-form" action="<?php echo CURRENT_URI; ?>" method="POST" novalidate autocomplete="off">
+        <form action="<?php echo CURRENT_URI; ?>" method="POST">
             <input type="hidden" name="topic_id" value="<?php echo $topic->id; ?>">
             <div class="form-group">
                 <label for="title">タイトル</label>
-                <input type="text" name="title" id="title" value="<?php echo $topic->title; ?>" class="form-control validate-target" required maxlength="30" autofocus>
-                <div class="invalid-feedback"></div>
+                <input type="text" name="title" id="title" value="<?php echo $topic->title; ?>" class="form-control">
             </div>
             <div class="form-group">
                 <label for="published">ステータス</label>
@@ -39,5 +38,5 @@ function index(TopicModel $topic, bool $is_edit): void
             </div>
         </form>
     </div>
-<?php
+    <?php
 }

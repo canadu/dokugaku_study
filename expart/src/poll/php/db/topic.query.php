@@ -197,7 +197,7 @@ class TopicQuery
         if ($comment->agree) {
             $sql = 'UPDATE topics SET likes = likes + 1 WHERE id = :topic_id';
         } else {
-            $sql = 'UPDATE topics SET dislikes = likes + 1 WHERE id = :topic_id';
+            $sql = 'UPDATE topics SET dislikes = dislikes + 1 WHERE id = :topic_id';
         }
         return $db->execute($sql, [':topic_id' => $comment->topic_id,]);
     }
