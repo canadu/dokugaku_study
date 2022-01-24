@@ -64,7 +64,7 @@ class DataSource
         $dsn = "mysql:host=" . $this->dbHost . ";dbname=" . $this->dbDatabase . ";charset=utf8mb4";
 
         //$this->conn = new PDO($dsn, $this->dbUsername, $this->dbPassword);
-        $this->conn = PdoSingletone::getInstance($dsn, $this->dbUsername, $this->dbPassword);
+        $this->conn = PdoSingleTone::getInstance($dsn, $this->dbUsername, $this->dbPassword);
     }
 
     //取得下データを返す
