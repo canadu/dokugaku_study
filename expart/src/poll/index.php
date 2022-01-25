@@ -1,9 +1,6 @@
 <?php
 
-//オブジェクトをセッションに格納した場合にはsession_startの前に雛形のクラス(user.model.php)を読みこ無必要がある。
-
-//use lib\Msg;
-
+//オブジェクトをセッションに格納した場合にはsession_startの前に雛形のクラス(user.model.php)を読みこむ必要がある。
 session_start();
 
 require_once 'config.php';
