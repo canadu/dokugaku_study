@@ -5,7 +5,6 @@ namespace db;
 use Dotenv;
 use PDO;
 use PDOStatement;
-use phpDocumentor\Reflection\Types\Mixed_;
 
 //vendorディレクトリの階層を指定する
 require __DIR__ . '/../../../vendor/autoload.php';

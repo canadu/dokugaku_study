@@ -16,6 +16,7 @@ function footer(): void
     </footer>
     </div>
     <?php
+    //JSファイルの読み込み
     $protocol = empty($_SERVER['HTTPS']) ? 'http://' : 'https://';
     $jsPath = $protocol . $_SERVER['HTTP_HOST'] . BASE_CONTEXT_PATH . 'js/';
     echo "<script src=\"{$jsPath}" . "form_validate.js\"></script>";
