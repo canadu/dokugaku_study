@@ -1,5 +1,9 @@
 RewriteEngine On
 
+#RewriteCondディレクティブとは
+#RewriteRule を実行するための条件を定義するための記述。 
+#RewriteCond に記述した条件が満たされた時のみ RewriteRule に記述したURLの書き換えと転送が実行されるようになる。
+
 # 行頭が/pollでない場合
 RewriteCond %{REQUEST_URI} !^/poll
 # R = 301リダイレクト L = Last
@@ -9,7 +13,7 @@ RewriteRule .? /poll/ [R,L]
 # RewriteCond %{REQUEST_URI} /poll/$
 # RewriteRule .? /poll/index.php [R,L]
 
-# ファイルがが存在しない場合 & ディレクトリが存在しない場合はindex.phpを呼び出す
+# ファイルが存在しない場合 AND ディレクトリが存在しない場合はindex.phpを呼び出す
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* /poll/$1/index.php
