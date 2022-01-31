@@ -16,5 +16,6 @@ RewriteRule .? /poll/ [R,L]
 # ファイルが存在しない場合 AND ディレクトリが存在しない場合はindex.phpを呼び出す
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule .* /poll/$1/index.php
+#RewriteRule .* /poll/$1/index.php
+RewriteRule .* /poll/index.php
 # RewriteRule (part.+(end|start)) /poll/$1/index.php
