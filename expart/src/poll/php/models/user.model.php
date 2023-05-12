@@ -11,6 +11,8 @@ class UserModel extends AbstractModel
     public string $pwd;
     public string $nickname;
     public int $del_flg;
+    public string $updated_by;
+    public string $updated_at;
 
     //なにか特定のメソッドを通じて値を取得するようなものにアンダースコアをつける！
     protected static mixed $SESSION_NAME = '_user';

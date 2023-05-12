@@ -29,9 +29,12 @@ function index(TopicModel $topic, bool $is_edit): void
                 <div>
                     <input type="submit" name="register" value="<?php echo $submit_title; ?>" class="btn btn-primary mr-3">
                 </div>
-                <div>
-                    <input type="submit" name="delete" value="削除" class="btn btn-danger mr-3">
-                </div>
+                <?php if($is_edit) : ?>
+                    <!-- 新規の場合、削除ボタンは表示しない -->
+                    <div>
+                        <input type="submit" name="delete" value="削除" class="btn btn-danger mr-3">
+                    </div>
+                <?php endif; ?>
                 <div>
                     <a href=<?php the_url('topic/archive'); ?>>戻る</a>
                 </div>

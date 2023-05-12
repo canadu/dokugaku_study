@@ -12,7 +12,12 @@ class CommentModel extends AbstractModel
     public int $del_flg;
     public string $body;
     public string $agree;
-    public string $nickname;
+    public string $updated_by;
+    public string $updated_at;
+    
+     //なにか特定のメソッドを通じて値を取得するようなものにアンダースコアをつける！
+     protected static mixed $SESSION_NAME = '_comment';
+
     /**
      * 賛否項目チェックの結果を返す
      * @return bool

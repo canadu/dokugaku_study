@@ -14,7 +14,7 @@ function get(): void
     Auth::requireLogin();
 
     //セッションからデータを取得
-    $topic = unserialize(TopicModel::getSessionAndFlush());
+    $topic = unserialize(TopicModel::getSessionAndFlush() ?? "");
 
     //セッションが取得できない場合
     if (empty($topic)) {

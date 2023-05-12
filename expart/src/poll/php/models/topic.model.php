@@ -14,6 +14,9 @@ class TopicModel extends AbstractModel
     public int $dislikes;
     public string $user_id;
     public int $del_flg;
+    public string $updated_by;
+    public string $nickname; //topicにはnicknameはないけど、関数の引数に複数の型(TopicModel|UserModel $topic)が宣言されている箇所がある。
+    public string $updated_at;
 
     //なにか特定のメソッドを通じて値を取得するようなものにアンダースコアをつける！
     protected static mixed $SESSION_NAME = '_topic';

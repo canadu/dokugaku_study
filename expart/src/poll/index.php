@@ -49,23 +49,8 @@ try {
     $method = strtolower($_SERVER['REQUEST_METHOD']);
     //対応したcontrollersのファイルを呼び出す
     route($rPath, $method);
+    //footerをcall
     \partials\footer();
 } catch (throwable $e) {
     die('<h1>なにか凄くおかしいようです。</h1>');
 }
-
-/**
- * 呼び出されたURIに応じてコントローラーのファイルを呼び出し、存在しない場合は
- * 404.phpを呼び出す
- * @rPath パス
- * @methods メソッド
- */
-
-//URLが増えてくるので管理が面倒になる
-// if ($_SERVER['REQUEST_URI'] === '/poll/login') {
-//     require_once SOURCE_BASE . 'controllers/login.php';
-// } elseif ($_SERVER['REQUEST_URI'] === '/poll/register') {
-//     require_once SOURCE_BASE . 'controllers/register.php';
-// } elseif ($_SERVER['REQUEST_URI'] === '/poll/') {
-//     require_once SOURCE_BASE . 'controllers/home.php';
-// }

@@ -7,10 +7,22 @@ WORKDIR /var/www/html
 
 # PHP で必要なライブラリをインストール
 RUN apt-get update \
-    && apt-get install -y libonig-dev libzip-dev unzip mariadb-client \
+    && apt-get install -y libonig-dev libzip-dev unzip mariadb-client git \
     && docker-php-ext-install pdo_mysql mysqli mbstring zip \
-    && pecl install xdebug \
+    && git clone https://github.com/xdebug/xdebug.git \
+    && cd xdebug \
+    && phpize \
+    && ./configure \
+    && make \
+    && make install \
     && docker-php-ext-enable xdebug
+
+# PHP で必要なライブラリをインストール
+# RUN apt-get update \
+#     && apt-get install -y libonig-dev libzip-dev unzip mariadb-client \
+#     && docker-php-ext-install pdo_mysql mysqli mbstring zip \
+#     && pecl install xdebug \
+#     && docker-php-ext-enable xdebug
 
 # composer のインストール
 # COPY --from=composer:1.10 /usr/bin/composer /usr/bin/composer

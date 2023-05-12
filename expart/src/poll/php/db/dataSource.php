@@ -12,6 +12,11 @@ require __DIR__ . '/../../../vendor/autoload.php';
 class PDOSingleTone
 {
     private static $SingleTone;
+    private PDO $conn;
+    private $dbHost;
+    private $dbUsername;
+    private $dbPassword;
+    private $dbDatabase;
 
     private function __construct($dsn, $username, $password)
     {
@@ -39,7 +44,6 @@ class PDOSingleTone
         return self::$SingleTone;
     }
 }
-
 
 class DataSource
 {

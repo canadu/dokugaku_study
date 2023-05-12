@@ -88,7 +88,7 @@ class Auth
     public static function isLogin(): bool
     {
         try {
-            $user = unserialize(UserModel::getSession());
+            $user = unserialize(UserModel::getSession() ?? "");
         } catch (throwable $e) {
             //エラーが起きた場合ユーザーをログアウトさせる
             UserModel::clearSession();
